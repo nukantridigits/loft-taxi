@@ -8,14 +8,14 @@ import './logout.scss';
 
 class LogoutLayout extends Component {
     render() {
-        let {onChangePage, className} = this.props;
+        let {onChangePage, className, pageId} = this.props;
 
         return (
             <div className={`main_wrapper logout_wrapper ${className}_page_wrapper`}>
                 <div className='main_content'>
                     <div className={`content ${className}_content`}>
                         <Logo/>
-                        <LoginForm onChangePage={onChangePage} isRegForm={className === PageList.signup.id}/>
+                        <LoginForm onChangePage={onChangePage} isRegForm={pageId === PageList.signup.id}/>
                     </div>
                 </div>
             </div>

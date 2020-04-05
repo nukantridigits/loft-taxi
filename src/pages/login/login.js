@@ -5,9 +5,10 @@ import LogoutLayout from '../../layouts/logout'
 class LoginPage extends Component {
     render() {
         let {onChangePage} = this.props;
+        let pageId = PageList.login.id;
 
         return (
-            <LogoutLayout onChangePage={onChangePage} className={PageList.login.id} />
+            <LogoutLayout onChangePage={onChangePage} className={pageId} pageId={pageId} />
         );
     }
 }
