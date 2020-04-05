@@ -5,9 +5,10 @@ import MainLayout from "../../layouts/main";
 class MapPage extends Component {
     render() {
         let {onChangePage} = this.props;
+        let pageId = PageList.map.id;
 
         return (
-            <MainLayout onChangePage={onChangePage} className={PageList.map.id}>
+            <MainLayout onChangePage={onChangePage} className={pageId} pageId={pageId}>
                     Карта
             </MainLayout>
         );

@@ -5,9 +5,10 @@ import MainLayout from "../../layouts/main";
 class ProfilePage extends Component {
     render() {
         let {onChangePage} = this.props;
+        let pageId = PageList.profile.id;
 
         return (
-            <MainLayout onChangePage={onChangePage} className={PageList.profile.id}>
+            <MainLayout onChangePage={onChangePage} className={pageId} pageId={pageId}>
                 Профиль
             </MainLayout>
         );

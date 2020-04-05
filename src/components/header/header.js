@@ -1,36 +1,53 @@
 import React, {Component} from 'react';
 import Logo from '../logo';
+import AppBar from '@material-ui/core/AppBar';
+import ToolBar from '@material-ui/core/ToolBar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import './header.scss';
 
 class Header extends Component {
     menuItemClickHandler = (event) => {
         event.preventDefault();
-
+        let page = '';
         let {target} = event;
-        let page = target.dataset.pageId;
+
+        if (target.tagName !== 'SPAN') {
+            page = target.dataset.pageId;
+        } else {
+            let link = target.closest('a');
+
+            if (link) {
+                page = link.dataset.pageId;
+            }
+        }
 
         return this.props.onChangePage(page);
     };
 
     render() {
-        let {menuItems} = this.props;
+        let {menuItems, currentPage} = this.props;
+        console.log('currentPage', currentPage);
 
-        let items = menuItems.map((item) =>
-            <li key={item.id}>
-                <a data-page-id={item.id} href='#' onClick={this.menuItemClickHandler}>
-                    {item.caption}
-                </a>
-            </li>
+        let topMenu = menuItems.map((item) =>
+            <Button key={item.id} href="#" className={currentPage === item.id ? 'active' : ''}
+                    data-page-id={item.id} onClick={this.menuItemClickHandler}>
+                {item.caption}
+            </Button>
         );
 
-        return <header className='header'>
-            <div className='header_content'>
-                <Logo/>
-                <ul className='top_menu'>
-                    {items}
-                </ul>
-            </div>
-        </header>;
+        return (<>
+            <AppBar position="static" color="transparent" className="header">
+                <ToolBar>
+                    <Typography className="logo_wrapper">
+                        <Logo/>
+                    </Typography>
+                    <Typography className="top_menu_wrapper">
+                        {topMenu}
+                    </Typography>
+                </ToolBar>
+            </AppBar>
+        </>);
     }
 }
 

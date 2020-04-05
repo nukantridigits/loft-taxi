@@ -11,7 +11,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            page: pageList.login.id,
+            page: pageList.map.id,
         };
     }
 

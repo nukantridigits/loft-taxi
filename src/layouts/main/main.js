@@ -5,7 +5,7 @@ import './main.scss';
 
 class MainLayout extends Component {
     render() {
-        let {children, onChangePage, className} = this.props;
+        let {children, onChangePage, className, pageId} = this.props;
 
         let menuItems = [
             {
@@ -24,7 +24,7 @@ class MainLayout extends Component {
 
         return (
             <div className={`main_wrapper ${className}_page_wrapper`}>
-                <Header onChangePage={onChangePage} menuItems={menuItems}/>
+                <Header onChangePage={onChangePage} menuItems={menuItems} currentPage={pageId}/>
                 <div className='main_content'>
                     <div className={`content ${className}_content`}>
                         {children}
