@@ -35,7 +35,7 @@ class MainLayout extends Component {
                 <Header onChangePage={onChangePage} menuItems={menuItems}/>
                 <div className='main_content'>
                     <div className={this.getContentClassList(pageClass)}>
-                         {children}
+                        {children}
                     </div>
                 </div>
             </div>

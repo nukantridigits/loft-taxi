@@ -52,16 +52,16 @@ class LoginForm extends Component {
                         <input id="login" name="login" type="text"/>
                     </div>
                     {pageClass === signup &&
-                        <div className="form_row">
-                            <div className="form_row with_label">
-                                <label htmlFor="name">Имя *</label>
-                                <input id="name" name="name" type="text"/>
-                            </div>
-                            <div className="form_row with_label">
-                                <label htmlFor="surname">Фамилия *</label>
-                                <input id="surname" name="surname" type="text"/>
-                            </div>
+                    <div className="form_row">
+                        <div className="form_row with_label">
+                            <label htmlFor="name">Имя *</label>
+                            <input id="name" name="name" type="text"/>
                         </div>
+                        <div className="form_row with_label">
+                            <label htmlFor="surname">Фамилия *</label>
+                            <input id="surname" name="surname" type="text"/>
+                        </div>
+                    </div>
                     }
                     <div className="form_row with_label">
                         <label htmlFor="pswrd">Пароль *</label>

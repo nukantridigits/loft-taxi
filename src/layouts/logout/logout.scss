@@ -1,19 +1,8 @@
-.main_wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .main_content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     .content {
-        margin-top: -70px;
-        .logo{
+        .logo {
             position: absolute;
-            top: 50%;
+            top: 43%;
             left: 30%;
         }
     }
