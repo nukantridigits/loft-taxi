@@ -7,7 +7,7 @@ class ProfilePage extends Component {
         let {onChangePage} = this.props;
 
         return (
-            <MainLayout onChangePage={onChangePage} pageClass={PageList.profile.id}>
+            <MainLayout onChangePage={onChangePage} className={PageList.profile.id}>
                 Профиль
             </MainLayout>
         );

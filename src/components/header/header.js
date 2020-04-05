@@ -16,7 +16,7 @@ class Header extends Component {
         let {menuItems} = this.props;
 
         let items = menuItems.map((item) =>
-            <li key={item.index}>
+            <li key={item.id}>
                 <a data-page-id={item.id} href='#' onClick={this.menuItemClickHandler}>
                     {item.caption}
                 </a>

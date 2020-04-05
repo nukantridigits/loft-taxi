@@ -4,16 +4,8 @@ import pageList from '../../appData/pageList'
 import './main.scss';
 
 class MainLayout extends Component {
-    getWrapperClassList = (pageClass) => {
-        return 'main_wrapper ' + pageClass + '_page_wrapper';
-    };
-
-    getContentClassList = (pageClass) => {
-        return 'content ' + pageClass + '_content';
-    };
-
     render() {
-        let {children, onChangePage, pageClass} = this.props;
+        let {children, onChangePage, className} = this.props;
 
         let menuItems = [
             {
@@ -31,10 +23,10 @@ class MainLayout extends Component {
         ];
 
         return (
-            <div className={this.getWrapperClassList(pageClass)}>
+            <div className={`main_wrapper ${className}_page_wrapper`}>
                 <Header onChangePage={onChangePage} menuItems={menuItems}/>
                 <div className='main_content'>
-                    <div className={this.getContentClassList(pageClass)}>
+                    <div className={`content ${className}_content`}>
                         {children}
                     </div>
                 </div>

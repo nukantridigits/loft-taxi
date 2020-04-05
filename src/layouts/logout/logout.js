@@ -1,30 +1,19 @@
 import React, {Component} from 'react';
 import LoginForm from "../../components/loginForm";
-import Modal from "../../components/modal";
 import Logo from "../../components/logo";
 
 import './logout.scss';
 
 class LogoutLayout extends Component {
-    getWrapperClassList = (pageClass) => {
-        return 'main_wrapper logout_wrapper ' + pageClass + '_page_wrapper';
-    };
-
-    getContentClassList = (pageClass) => {
-        return 'content ' + pageClass + '_content';
-    };
-
     render() {
-        let {onChangePage, pageClass} = this.props;
+        let {onChangePage, className} = this.props;
 
         return (
-            <div className={this.getWrapperClassList(pageClass)}>
+            <div className={`main_wrapper logout_wrapper ${className}_page_wrapper`}>
                 <div className='main_content'>
-                    <div className={this.getContentClassList(pageClass)}>
+                    <div className={`content ${className}_content`}>
                         <Logo/>
-                        <Modal>
-                            <LoginForm onChangePage={onChangePage} pageClass={pageClass}/>
-                        </Modal>
+                        <LoginForm onChangePage={onChangePage} className={className}/>
                     </div>
                 </div>
             </div>

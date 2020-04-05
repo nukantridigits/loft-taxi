@@ -7,7 +7,7 @@ class MapPage extends Component {
         let {onChangePage} = this.props;
 
         return (
-            <MainLayout onChangePage={onChangePage} pageClass={PageList.map.id}>
+            <MainLayout onChangePage={onChangePage} className={PageList.map.id}>
                     Карта
             </MainLayout>
         );

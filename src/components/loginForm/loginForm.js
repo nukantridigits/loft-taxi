@@ -17,7 +17,7 @@ class LoginForm extends Component {
     };
 
     render() {
-        let {pageClass} = this.props;
+        let {className} = this.props;
         let signup = PageList.signup.id;
         let login = PageList.login.id;
 
@@ -27,7 +27,7 @@ class LoginForm extends Component {
         let linkBtnText = 'Зарегистрируйтесь ';
         let loginLabelText = 'Имя пользователя *';
 
-        if (pageClass === signup) {
+        if (className === signup) {
             formClass = 'form_signup';
             caption = 'Регистрация';
             linkWrapperText = 'Уже зарегистрированы?';
@@ -43,7 +43,7 @@ class LoginForm extends Component {
                     </div>
                     <div className="link_wrapper form_row">
                         <p className="link_wrapper_text">{linkWrapperText}</p>
-                        <a href="#" data-page-id={pageClass === login ? signup : login} onClick={this.changePage}>
+                        <a href="#" data-page-id={className === login ? signup : login} onClick={this.changePage}>
                             {linkBtnText}
                         </a>
                     </div>
@@ -51,7 +51,7 @@ class LoginForm extends Component {
                         <label htmlFor="login">{loginLabelText}</label>
                         <input id="login" name="login" type="text"/>
                     </div>
-                    {pageClass === signup &&
+                    {className === signup &&
                     <div className="form_row">
                         <div className="form_row with_label">
                             <label htmlFor="name">Имя *</label>

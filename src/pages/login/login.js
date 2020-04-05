@@ -7,7 +7,7 @@ class LoginPage extends Component {
         let {onChangePage} = this.props;
 
         return (
-            <LogoutLayout onChangePage={onChangePage} pageClass={PageList.login.id} />
+            <LogoutLayout onChangePage={onChangePage} className={PageList.login.id} />
         );
     }
 }
