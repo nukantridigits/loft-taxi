@@ -18,7 +18,6 @@ class LoginForm extends Component {
 
     render() {
         let {isRegForm} = this.props;
-        console.log(isRegForm);
         let signup = PageList.signup.id;
         let login = PageList.login.id;
 
