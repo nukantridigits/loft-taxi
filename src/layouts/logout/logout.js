@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import LoginForm from "../../components/loginForm";
 import Logo from "../../components/logo";
+import PageList from "../../appData/pageList";
+
 
 import './logout.scss';
 
@@ -13,7 +15,7 @@ class LogoutLayout extends Component {
                 <div className='main_content'>
                     <div className={`content ${className}_content`}>
                         <Logo/>
-                        <LoginForm onChangePage={onChangePage} className={className}/>
+                        <LoginForm onChangePage={onChangePage} isRegForm={className === PageList.signup.id}/>
                     </div>
                 </div>
             </div>

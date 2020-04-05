@@ -17,7 +17,8 @@ class LoginForm extends Component {
     };
 
     render() {
-        let {className} = this.props;
+        let {isRegForm} = this.props;
+        console.log(isRegForm);
         let signup = PageList.signup.id;
         let login = PageList.login.id;
 
@@ -27,7 +28,7 @@ class LoginForm extends Component {
         let linkBtnText = 'Зарегистрируйтесь ';
         let loginLabelText = 'Имя пользователя *';
 
-        if (className === signup) {
+        if (isRegForm) {
             formClass = 'form_signup';
             caption = 'Регистрация';
             linkWrapperText = 'Уже зарегистрированы?';
@@ -43,7 +44,7 @@ class LoginForm extends Component {
                     </div>
                     <div className="link_wrapper form_row">
                         <p className="link_wrapper_text">{linkWrapperText}</p>
-                        <a href="#" data-page-id={className === login ? signup : login} onClick={this.changePage}>
+                        <a href="#" data-page-id={!isRegForm ? signup : login} onClick={this.changePage}>
                             {linkBtnText}
                         </a>
                     </div>
@@ -51,7 +52,7 @@ class LoginForm extends Component {
                         <label htmlFor="login">{loginLabelText}</label>
                         <input id="login" name="login" type="text"/>
                     </div>
-                    {className === signup &&
+                    {isRegForm &&
                     <div className="form_row">
                         <div className="form_row with_label">
                             <label htmlFor="name">Имя *</label>

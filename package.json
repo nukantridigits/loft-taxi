@@ -32,6 +32,7 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/core": "^4.9.9",
     "node-sass": "^4.13.1"
   }
 }
