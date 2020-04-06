@@ -1,0 +1,25 @@
+.header {
+    padding: 0 24px;
+    height: 70px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+
+    &_content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        width: 156px;
+        height: 62px;
+        display: flex;
+        align-items: center;
+    }
+    .top_menu {
+        width: 11%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+}
