@@ -11,7 +11,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            page: pageList.map.id,
+            page: pageList.login.id,
         };
     }
 
@@ -41,9 +41,9 @@ class App extends Component {
         }
 
         return (
-            <div className='app' id='app'>
-                {component}
-            </div>
+                <div className="app" id="app">
+                    {component}
+                </div>
         );
     }
 }

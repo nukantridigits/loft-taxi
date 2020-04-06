@@ -40,7 +40,7 @@ class Header extends Component {
             <AppBar position="static" color="transparent" className="header">
                 <ToolBar>
                     <Typography className="logo_wrapper">
-                        <Logo/>
+                        <Logo type="dark"/>
                     </Typography>
                     <Typography className="top_menu_wrapper">
                         {topMenu}
