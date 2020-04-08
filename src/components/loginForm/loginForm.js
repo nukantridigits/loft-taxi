@@ -20,7 +20,7 @@ class LoginForm extends Component {
     changePage = (event) => {
         event.preventDefault();
         let {target} = event;
-        console.log(target.dataset.pageId);
+
         return this.props.onChangePage(target.dataset.pageId);
     };
 
@@ -87,7 +87,6 @@ class LoginForm extends Component {
                             <Input id="pswrd" required/>
                         </FormControl>
                     </Grid>
-
 
                     <Grid item xs={12} align="right" className="form_footer">
                         <Button size="large" type="submit" variant="contained" color="primary">
