@@ -9,7 +9,13 @@ import './header.scss';
 
 class Header extends Component {
     static propTypes = {
-        // menuItems: TODO как проверить что это массив объектов,у которого значения свойств - string
+        menuItems: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                route: PropTypes.string.isRequired,
+                caption: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired,
         currentPage: PropTypes.string.isRequired
     };
 
