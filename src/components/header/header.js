@@ -16,7 +16,8 @@ class Header extends Component {
                 caption: PropTypes.string.isRequired
             }).isRequired
         ).isRequired,
-        currentPage: PropTypes.string.isRequired
+        currentPage: PropTypes.string.isRequired,
+        onChangePage: PropTypes.func
     };
 
     menuItemClickHandler = (event) => {
