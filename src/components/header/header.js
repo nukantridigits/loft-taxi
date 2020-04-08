@@ -9,6 +9,7 @@ import './header.scss';
 class Header extends Component {
     menuItemClickHandler = (event) => {
         event.preventDefault();
+
         let page = '';
         let {target} = event;
 
