@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import LoginForm from "../../components/loginForm";
 import Logo from "../../components/logo";
 import PageList from "../../appData/pageList";
@@ -8,6 +9,12 @@ import Paper from "@material-ui/core/Paper";
 import './logout.scss';
 
 class LogoutLayout extends Component {
+    static propTypes = {
+        onChangePage: PropTypes.func.isRequired,
+        className: PropTypes.string.isRequired,
+        pageId: PropTypes.string.isRequired
+    };
+
     render() {
         let {onChangePage, className, pageId} = this.props;
 

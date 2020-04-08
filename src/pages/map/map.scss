@@ -2,4 +2,11 @@
     .main_content {
         position: relative;
     }
+
+    .search_form_wrapper{
+        position: relative;
+        z-index: 1;
+        width: 1170px;
+        margin: 0 auto;
+    }
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
@@ -11,6 +12,15 @@ import PageList from "../../appData/pageList";
 import './loginForm.scss';
 
 class LoginForm extends Component {
+    static defaultProps = {
+        isRegForm: false
+    };
+
+    static propTypes = {
+        onChangePage: PropTypes.func.isRequired,
+        isRegForm: PropTypes.bool
+    };
+
     formSubmitHandler = (event) => {
         event.preventDefault();
 
@@ -50,7 +60,7 @@ class LoginForm extends Component {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <FormControl fullWidth="true" className="form_control">
+                        <FormControl fullWidth={true} className="form_control">
                             <InputLabel htmlFor="login">
                                 {loginLabelText}
                             </InputLabel>
@@ -61,7 +71,7 @@ class LoginForm extends Component {
                     {isRegForm &&
                     <Grid container spacing={2}>
                         <Grid item sm={6}>
-                            <FormControl fullWidth="true" className="form_control">
+                            <FormControl fullWidth={true} className="form_control">
                                 <InputLabel htmlFor="name">
                                     Имя
                                 </InputLabel>
@@ -69,7 +79,7 @@ class LoginForm extends Component {
                             </FormControl>
                         </Grid>
                         <Grid item sm={6}>
-                            <FormControl fullWidth="true" className="form_control">
+                            <FormControl fullWidth={true} className="form_control">
                                 <InputLabel htmlFor="surname">
                                     Фамилия
                                 </InputLabel>
@@ -80,7 +90,7 @@ class LoginForm extends Component {
                     }
 
                     <Grid item xs={12}>
-                        <FormControl fullWidth="true" className="form_control">
+                        <FormControl fullWidth={true} className="form_control">
                             <InputLabel htmlFor="pswrd">
                                 Пароль
                             </InputLabel>

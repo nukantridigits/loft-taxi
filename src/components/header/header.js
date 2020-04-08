@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Logo from '../logo';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/ToolBar';
@@ -7,6 +8,11 @@ import Button from '@material-ui/core/Button';
 import './header.scss';
 
 class Header extends Component {
+    static propTypes = {
+        // menuItems: TODO как проверить что это массив объектов,у которого значения свойств - string
+        currentPage: PropTypes.string.isRequired
+    };
+
     menuItemClickHandler = (event) => {
         event.preventDefault();
 

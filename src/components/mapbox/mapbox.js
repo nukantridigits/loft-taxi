@@ -6,7 +6,7 @@ import './mapbox.scss';
 class MapBox extends Component {
     constructor(props) {
         super(props);
-
+        this.map = null;
         this.mapRef = React.createRef();
     }
 
