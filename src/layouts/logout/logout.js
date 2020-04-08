@@ -14,11 +14,22 @@ class LogoutLayout extends Component {
         return (
             <div className={`main_wrapper logout_wrapper ${className}_page_wrapper`}>
                 <div className='main_content'>
-                    <div className={`content ${className}_content`}>
-                        <Logo type="light"/>
-                        <Paper>
-                            <LoginForm onChangePage={onChangePage} isRegForm={pageId === PageList.signup.id}/>
-                        </Paper>
+                    <div className={`content ${className}_content wrapper`}>
+                        <Grid container
+                              justify="center"
+                              alignItems="center"
+                        >
+                            <Grid item xs={12} sm={6}>
+                                <Grid container justify="center">
+                                    <Logo type="light"/>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Paper className="paper_container">
+                                    <LoginForm onChangePage={onChangePage} isRegForm={pageId === PageList.signup.id}/>
+                                </Paper>
+                            </Grid>
+                        </Grid>
                     </div>
                 </div>
             </div>

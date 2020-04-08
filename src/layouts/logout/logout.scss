@@ -3,9 +3,13 @@
         background: center / cover no-repeat url("../../assets/img/bg.jpg");
         .content {
             .logo {
-                position: absolute;
-                top: 43%;
-                left: 30%;
+                width: 157px;
+                height: 37px;
+            }
+            .paper_container {
+                @media all and (min-width: 1170px) {
+                    width: 503px;
+                }
             }
         }
     }

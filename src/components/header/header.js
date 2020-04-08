@@ -27,7 +27,6 @@ class Header extends Component {
 
     render() {
         let {menuItems, currentPage} = this.props;
-        console.log('currentPage', currentPage);
 
         let topMenu = menuItems.map((item) =>
             <Button key={item.id} href="#" className={currentPage === item.id ? 'active' : ''}
@@ -36,7 +35,7 @@ class Header extends Component {
             </Button>
         );
 
-        return (<>
+        return (
             <AppBar position="static" color="transparent" className="header">
                 <ToolBar>
                     <Typography className="logo_wrapper">
@@ -47,7 +46,7 @@ class Header extends Component {
                     </Typography>
                 </ToolBar>
             </AppBar>
-        </>);
+        );
     }
 }
 
