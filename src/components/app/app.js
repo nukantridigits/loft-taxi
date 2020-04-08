@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {AuthContext} from "../../contexts/authcontext";
 import pageList from '../../appData/pageList';
 import LoginPage from "../../pages/login";
 import SignupPage from "../../pages/signup";
@@ -20,8 +21,9 @@ class App extends Component {
     };
 
     render() {
-        let {page} = this.state;
         let component = null;
+        let {page} = this.state;
+        let isLoggedIn = this.context.isLoggedIn;
 
         switch (page) {
             case(pageList.login.id):
@@ -31,21 +33,27 @@ class App extends Component {
                 component = <SignupPage onChangePage={this.onChangePage}/>;
                 break;
             case(pageList.map.id):
-                component = <MapPage onChangePage={this.onChangePage}/>;
+                if (isLoggedIn) {
+                    component = <MapPage onChangePage={this.onChangePage}/>;
+                }
                 break;
             case(pageList.profile.id):
-                component = <ProfilePage onChangePage={this.onChangePage}/>;
+                if (isLoggedIn) {
+                    component = <ProfilePage onChangePage={this.onChangePage}/>;
+                }
                 break;
             default:
                 break;
         }
 
         return (
-                <div className="app" id="app">
-                    {component}
-                </div>
+            <div className="app" id="app">
+                {component}
+            </div>
         );
     }
 }
+
+App.contextType = AuthContext;
 
 export default App;

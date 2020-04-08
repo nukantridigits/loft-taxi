@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import {AuthContext} from '../../contexts/authcontext';
 import PropTypes from 'prop-types';
 import Logo from '../logo';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/ToolBar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import PageList from "../../appData/pageList";
 import './header.scss';
 
 class Header extends Component {
@@ -23,20 +25,24 @@ class Header extends Component {
     menuItemClickHandler = (event) => {
         event.preventDefault();
 
-        let page = '';
+        let nextPage = '';
         let {target} = event;
 
         if (target.tagName !== 'SPAN') {
-            page = target.dataset.pageId;
+            nextPage = target.dataset.pageId;
         } else {
             let link = target.closest('a');
 
             if (link) {
-                page = link.dataset.pageId;
+                nextPage = link.dataset.pageId;
             }
         }
 
-        return this.props.onChangePage(page);
+        if (nextPage === PageList.login.id) {
+            this.context.logout();
+        }
+
+        return this.props.onChangePage(nextPage);
     };
 
     render() {
@@ -63,5 +69,7 @@ class Header extends Component {
         );
     }
 }
+
+Header.contextType = AuthContext;
 
 export default Header;

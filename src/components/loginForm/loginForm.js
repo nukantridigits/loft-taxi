@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {AuthContext} from '../../contexts/authcontext';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -7,11 +8,18 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
-
 import PageList from "../../appData/pageList";
 import './loginForm.scss';
 
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            login: '',
+            password: ''
+        }
+    }
+
     static defaultProps = {
         isRegForm: false
     };
@@ -21,13 +29,22 @@ class LoginForm extends Component {
         isRegForm: PropTypes.bool
     };
 
-    formSubmitHandler = (event) => {
-        event.preventDefault();
+    handleLoginChange = event => {
+        return this.setState({login: event.target.value});
+    };
 
+    handlePasswordChange = event => {
+        return this.setState({password: event.target.value});
+    };
+
+    formSubmitHandler = () => {
+        let {login, password} = this.state;
+
+        this.context.login(login, password);
         return this.props.onChangePage(PageList.map.id);
     };
 
-    changePage = (event) => {
+    changePage = event => {
         event.preventDefault();
         let {target} = event;
 
@@ -36,6 +53,7 @@ class LoginForm extends Component {
 
     render() {
         let {isRegForm} = this.props;
+        let {login, password} = this.state;
         let formMainClass = isRegForm ? 'form_signup' : 'form_login';
         let headerText = isRegForm ? 'Регистрация' : 'Войти';
         let linkWrapperText = isRegForm ? 'Уже зарегистрированы?' : 'Новый пользователь?';
@@ -64,7 +82,7 @@ class LoginForm extends Component {
                             <InputLabel htmlFor="login">
                                 {loginLabelText}
                             </InputLabel>
-                            <Input id="login" required/>
+                            <Input id="login" value={login} onChange={this.handleLoginChange} required/>
                         </FormControl>
                     </Grid>
 
@@ -91,10 +109,10 @@ class LoginForm extends Component {
 
                     <Grid item xs={12}>
                         <FormControl fullWidth={true} className="form_control">
-                            <InputLabel htmlFor="pswrd">
+                            <InputLabel htmlFor="password">
                                 Пароль
                             </InputLabel>
-                            <Input id="pswrd" required/>
+                            <Input id="password" value={password} onChange={this.handlePasswordChange} required/>
                         </FormControl>
                     </Grid>
 
@@ -108,5 +126,7 @@ class LoginForm extends Component {
         );
     }
 }
+
+LoginForm.contextType = AuthContext;
 
 export default LoginForm;
