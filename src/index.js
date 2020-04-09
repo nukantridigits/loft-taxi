@@ -7,12 +7,10 @@ import {MuiThemeProvider} from "@material-ui/core/styles";
 import './index.scss';
 
 ReactDOM.render(
-    <React.StrictMode>
         <MuiThemeProvider theme={theme}>
             <AuthProvider>
                 <App/>
             </AuthProvider>
-        </MuiThemeProvider>
-    </React.StrictMode>,
+        </MuiThemeProvider>,
     document.getElementById('root')
 );
