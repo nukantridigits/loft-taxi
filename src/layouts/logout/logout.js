@@ -19,7 +19,7 @@ class LogoutLayout extends Component {
         let {onChangePage, className, pageId} = this.props;
 
         return (
-            <div className={`main_wrapper logout_wrapper ${className}_page_wrapper`}>
+            <div data-testid="logout-layout-wrapper" className={`main_wrapper logout_wrapper ${className}_page_wrapper`}>
                 <div className='main_content'>
                     <div className={`content ${className}_content wrapper`}>
                         <Grid container
