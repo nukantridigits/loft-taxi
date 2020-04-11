@@ -41,7 +41,7 @@ class LoginForm extends Component {
         let {login, password} = this.state;
 
         this.context.login(login, password);
-        return this.props.onChangePage(PageList.map.id);
+        return this.props.onChangePage(PageList.profile.id);
     };
 
     changePage = event => {

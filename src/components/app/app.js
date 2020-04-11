@@ -12,7 +12,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            page: pageList.login.id,
+            page: pageList.profile.id,
         };
     }
 
@@ -23,7 +23,8 @@ class App extends Component {
     render() {
         let component = null;
         let {page} = this.state;
-        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : false;
+        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : true; //true для теста
+        let isLoginPage = page === pageList.login.id;
 
         switch (page) {
             case(pageList.login.id):
@@ -32,7 +33,7 @@ class App extends Component {
             case(pageList.signup.id):
                 component = <SignupPage onChangePage={this.onChangePage}/>;
                 break;
-/*            case(pageList.map.id):
+           /* case(pageList.map.id):
                 if (isLoggedIn) {
                     component = <MapPage onChangePage={this.onChangePage}/>;
                 }
@@ -47,7 +48,7 @@ class App extends Component {
         }
 
         return (
-            <div className="app" id="app" data-testid="app">
+            <div className={`app ${isLoginPage ? pageList.login.id : ''}`} id="app" data-testid="app">
                 {component}
             </div>
         );

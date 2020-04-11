@@ -38,8 +38,10 @@ class Header extends Component {
             }
         }
 
-        if (nextPage === PageList.login.id) {
-            this.context.logout();
+        if (this.context) { //todo для тестов - разобраться
+            if (nextPage === PageList.login.id) {
+                this.context.logout();
+            }
         }
 
         return this.props.onChangePage(nextPage);
@@ -56,7 +58,7 @@ class Header extends Component {
         );
 
         return (
-            <AppBar position="static" color="transparent" className="header">
+            <AppBar data-testid="header" position="static" color="transparent" className="header">
                 <ToolBar>
                     <Typography className="logo_wrapper">
                         <Logo type="dark"/>

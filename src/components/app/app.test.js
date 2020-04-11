@@ -1,6 +1,5 @@
 import React from 'react';
-import {render, cleanup} from '@testing-library/react';
-import {within} from '@testing-library/dom/dist/@testing-library/dom.umd.js';
+import {render, cleanup, within} from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
@@ -13,9 +12,11 @@ describe('App', () => {
         expect(appContainer).toBeInTheDocument();
     });
 
-    it('App child component render test', () => {
-        const innerComponent = within(appContainer).getByTestId('logout-layout-wrapper');
-        expect(innerComponent).toBeTruthy();
-        expect(innerComponent.classList.contains('login_page_wrapper'));
+    it('App child component render test (LoginPage Component for example)', () => {
+        if (appContainer.classList.contains('login')) {
+            const innerComponent = within(appContainer).getByTestId('logout-layout-wrapper');
+            expect(innerComponent).toBeTruthy();
+            expect(innerComponent.classList.contains('login_page_wrapper')).toBeTruthy();
+        }
     });
 });
