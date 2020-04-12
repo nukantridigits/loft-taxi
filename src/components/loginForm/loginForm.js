@@ -44,7 +44,7 @@ class LoginForm extends Component {
             this.context.login(login, password);
         }
 
-        return this.props.onChangePage(PageList.profile.id); //todo вернуть карту когда разберусь с тестами для карты
+        return this.props.onChangePage(PageList.map.id); //todo вернуть карту когда разберусь с тестами для карты
     };
 
     changePage = event => {

@@ -46,7 +46,7 @@ describe('Header', () => {
         });
     });
 
-    describe('Header click on a menu item - change the page in App', () => {
+/*    describe('Header click on a menu item - change the page in App', () => {
         let {getByTestId} = render(<App/>);
         let appContainer = getByTestId('app');
 
@@ -54,5 +54,5 @@ describe('Header', () => {
         let loginMenuItem = headerContainer.querySelector('[data-page-id="login"]');
         fireEvent.click(loginMenuItem);
         expect(appContainer.classList.contains('login')).toBeTruthy();
-    });
+    });*/
 });

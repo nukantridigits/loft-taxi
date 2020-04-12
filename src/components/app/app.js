@@ -23,7 +23,7 @@ class App extends Component {
     render() {
         let component = null;
         let {page} = this.state;
-        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : true; //true для теста
+        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : false; //true для теста
         let isLoginPage = page === pageList.login.id;
 
         switch (page) {
