@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, cleanup, within,fireEvent} from '@testing-library/react';
+import {render, cleanup, within, fireEvent} from '@testing-library/react';
 import Header from './Header';
 import App from '../../components/app/';
 import pageList from "../../appData/pageList";
@@ -23,14 +23,15 @@ describe('Header', () => {
     ];
 
     describe('Header render/active menu item', () => {
+        const onChangePage = jest.fn();
         let {getByTestId} = render(
             <Header menuItems={menuItems}
-                    onChangePage={() => {}}
+                    onChangePage={onChangePage}
                     currentPage={pageList.profile.id}
             />
         );
 
-        const headerComponent = getByTestId('header');
+        let headerComponent = getByTestId('header');
 
         it('Header component render', () => {
             expect(headerComponent).toBeInTheDocument();

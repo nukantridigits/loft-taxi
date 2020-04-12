@@ -14,7 +14,9 @@ class ProfilePage extends Component {
 
         return (
             <MainLayout onChangePage={onChangePage} className={pageId} pageId={pageId}>
-                Профиль
+                <div data-testid="profile-page-content">
+                    Профиль
+                </div>
             </MainLayout>
         );
     }

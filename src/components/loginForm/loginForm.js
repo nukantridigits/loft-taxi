@@ -40,8 +40,11 @@ class LoginForm extends Component {
     formSubmitHandler = () => {
         let {login, password} = this.state;
 
-        this.context.login(login, password);
-        return this.props.onChangePage(PageList.profile.id);
+        if (this.context) { //todo проверка для тестов,оставить?
+            this.context.login(login, password);
+        }
+
+        return this.props.onChangePage(PageList.profile.id); //todo вернуть карту когда разберусь с тестами для карты
     };
 
     changePage = event => {
@@ -61,7 +64,7 @@ class LoginForm extends Component {
         let loginLabelText = isRegForm ? 'Адрес электронной почты' : 'Имя пользователя';
 
         return (
-            <form className={`form ${formMainClass}`} id="loft_taxi_form"
+            <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="auth-form"
                   onSubmit={this.formSubmitHandler}>
                 <Grid container>
                     <Grid item xs={12}>
@@ -70,7 +73,7 @@ class LoginForm extends Component {
                         </Typography>
                         <Typography component="p">
                             {linkWrapperText}
-                            <Link data-page-id={!isRegForm ? PageList.signup.id : PageList.login.id}
+                            <Link data-testid="change-form-page-link" data-page-id={!isRegForm ? PageList.signup.id : PageList.login.id}
                                   onClick={this.changePage}>
                                 {linkBtnText}
                             </Link>
@@ -82,7 +85,7 @@ class LoginForm extends Component {
                             <InputLabel htmlFor="login">
                                 {loginLabelText}
                             </InputLabel>
-                            <Input id="login" value={login} onChange={this.handleLoginChange} required/>
+                            <Input id="login" data-testid="login-input" value={login} onChange={this.handleLoginChange} required/>
                         </FormControl>
                     </Grid>
 
@@ -93,7 +96,7 @@ class LoginForm extends Component {
                                 <InputLabel htmlFor="name">
                                     Имя
                                 </InputLabel>
-                                <Input id="name" required/>
+                                <Input id="name" data-testid="name-input" required/>
                             </FormControl>
                         </Grid>
                         <Grid item sm={6}>
@@ -101,7 +104,7 @@ class LoginForm extends Component {
                                 <InputLabel htmlFor="surname">
                                     Фамилия
                                 </InputLabel>
-                                <Input id="surname" required/>
+                                <Input id="surname" data-testid="surname-input" required/>
                             </FormControl>
                         </Grid>
                     </Grid>
@@ -112,7 +115,7 @@ class LoginForm extends Component {
                             <InputLabel htmlFor="password">
                                 Пароль
                             </InputLabel>
-                            <Input id="password" value={password} onChange={this.handlePasswordChange} required/>
+                            <Input id="password" data-testid="password-input" value={password} onChange={this.handlePasswordChange} required/>
                         </FormControl>
                     </Grid>
 
