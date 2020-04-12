@@ -30,7 +30,7 @@ class MainLayout extends Component {
         ];
 
         return (
-            <div className={`main_wrapper ${className}_page_wrapper`}>
+            <div data-testid="main-layout" className={`main_wrapper ${className}_page_wrapper`}>
                 <Header onChangePage={onChangePage} menuItems={menuItems} currentPage={pageId} />
                 <div className='main_content'>
                     <div className={`content ${className}_content`}>

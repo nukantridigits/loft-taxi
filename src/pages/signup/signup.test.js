@@ -10,7 +10,7 @@ describe('SignupPage', () => {
         <SignupPage onChangePage={onChangePage} />
     );
 
-    let logoutLayoutWrapper = getByTestId('logout-layout-wrapper');
+    let logoutLayoutWrapper = getByTestId('logout-layout');
 
     it('LogoutLayout component render', () => {
         expect(logoutLayoutWrapper).toBeInTheDocument();
