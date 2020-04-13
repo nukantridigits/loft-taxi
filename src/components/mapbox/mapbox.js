@@ -19,7 +19,9 @@ class MapBox extends Component {
     }
 
     componentWillUnmount() {
-        this.map.remove();
+        if (this.map) {
+            this.map.remove();
+        }
     }
 
     render() {

@@ -3,7 +3,7 @@ import {AuthContext} from "../../contexts/authcontext";
 import pageList from '../../appData/pageList';
 import LoginPage from "../../pages/login";
 import SignupPage from "../../pages/signup";
-// import MapPage from "../../pages/map";
+import MapPage from "../../pages/map";
 import ProfilePage from "../../pages/profile";
 import './app.scss';
 
@@ -12,7 +12,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            page: pageList.profile.id,
+            page: pageList.login.id,
         };
     }
 
@@ -33,11 +33,11 @@ class App extends Component {
             case(pageList.signup.id):
                 component = <SignupPage onChangePage={this.onChangePage}/>;
                 break;
-           /* case(pageList.map.id):
+            case(pageList.map.id):
                 if (isLoggedIn) {
                     component = <MapPage onChangePage={this.onChangePage}/>;
                 }
-                break;*/
+                break;
             case(pageList.profile.id):
                 if (isLoggedIn) {
                     component = <ProfilePage onChangePage={this.onChangePage}/>;

@@ -8,7 +8,6 @@ import Paper from "@material-ui/core/Paper";
 
 import './map.scss';
 
-
 class MapPage extends Component {
     static propTypes = {
         onChangePage: PropTypes.func.isRequired,
@@ -20,14 +19,16 @@ class MapPage extends Component {
 
         return (
             <MainLayout onChangePage={onChangePage} className={pageId} pageId={pageId}>
-                <MapBox/>
-                <Grid container className="search_form_wrapper">
-                    <Paper>
-                        <form>
-                            <h1>Форма заказа</h1>
-                        </form>
-                    </Paper>
-                </Grid>
+                <div data-testid="map-page-content">
+                    {/*<MapBox/>*/}
+                    <Grid container className="search_form_wrapper">
+                        <Paper>
+                            <form>
+                                <h1>Форма заказа</h1>
+                            </form>
+                        </Paper>
+                    </Grid>
+                </div>
             </MainLayout>
         );
     }
