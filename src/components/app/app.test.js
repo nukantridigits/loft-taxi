@@ -13,10 +13,8 @@ describe('App', () => {
     });
 
     it('App child component render test (LoginPage Component for example)', () => {
-        if (appContainer.classList.contains('login')) {
-            let innerComponent = within(appContainer).getByTestId('logout-layout');
-            expect(innerComponent).toBeTruthy();
-            expect(innerComponent.classList.contains('login_page_wrapper')).toBeTruthy();
-        }
+        let innerComponent = within(appContainer).getByTestId('logout-layout');
+        expect(innerComponent).toBeTruthy();
+        expect(innerComponent.classList.contains('login_page_wrapper')).toBeTruthy();
     });
 });

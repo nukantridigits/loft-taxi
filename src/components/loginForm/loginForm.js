@@ -40,11 +40,11 @@ class LoginForm extends Component {
     formSubmitHandler = () => {
         let {login, password} = this.state;
 
-        if (this.context) { //todo проверка для тестов,оставить?
+        if (this.context) {
             this.context.login(login, password);
         }
 
-        return this.props.onChangePage(PageList.map.id); //todo вернуть карту когда разберусь с тестами для карты
+        return this.props.onChangePage(PageList.map.id);
     };
 
     changePage = event => {
@@ -120,7 +120,7 @@ class LoginForm extends Component {
                     </Grid>
 
                     <Grid item xs={12} align="right" className="form_footer">
-                        <Button size="large" type="submit" variant="contained" color="primary">
+                        <Button data-testid="form-submit-btn" size="large" type="submit" variant="contained" color="primary">
                             Войти
                         </Button>
                     </Grid>

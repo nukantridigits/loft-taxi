@@ -23,8 +23,7 @@ class App extends Component {
     render() {
         let component = null;
         let {page} = this.state;
-        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : false; //true для теста
-        let isLoginPage = page === pageList.login.id;
+        let isLoggedIn = this.context && this.context.isLoggedIn ? this.context.isLoggedIn : false;
 
         switch (page) {
             case(pageList.login.id):
@@ -48,7 +47,7 @@ class App extends Component {
         }
 
         return (
-            <div className={`app ${isLoginPage ? pageList.login.id : ''}`} id="app" data-testid="app">
+            <div className="app" id="app" data-testid="app">
                 {component}
             </div>
         );

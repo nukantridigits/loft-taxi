@@ -38,7 +38,7 @@ class Header extends Component {
             }
         }
 
-        if (this.context) { //todo для тестов - разобраться
+        if (this.context) {
             if (nextPage === PageList.login.id) {
                 this.context.logout();
             }

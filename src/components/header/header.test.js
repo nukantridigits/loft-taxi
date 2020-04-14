@@ -1,7 +1,6 @@
 import React from 'react';
 import {render, cleanup, within, fireEvent} from '@testing-library/react';
 import Header from './Header';
-import App from '../../components/app/';
 import pageList from "../../appData/pageList";
 
 describe('Header', () => {
@@ -44,15 +43,11 @@ describe('Header', () => {
             let isActive = profileMenuItemText.closest('a').classList.contains('active');
             expect(isActive).toBeTruthy();
         });
+
+        it('Menu item click', () => {
+            let loginMenuItem = within(headerComponent).getByText('Выйти').closest('a');
+            fireEvent.click(loginMenuItem);
+            expect(onChangePage).toHaveBeenCalled();
+        });
     });
-
-/*    describe('Header click on a menu item - change the page in App', () => {
-        let {getByTestId} = render(<App/>);
-        let appContainer = getByTestId('app');
-
-        let headerContainer = within(appContainer).getByTestId('header');
-        let loginMenuItem = headerContainer.querySelector('[data-page-id="login"]');
-        fireEvent.click(loginMenuItem);
-        expect(appContainer.classList.contains('login')).toBeTruthy();
-    });*/
 });

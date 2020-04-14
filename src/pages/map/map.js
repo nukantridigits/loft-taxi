@@ -20,7 +20,7 @@ class MapPage extends Component {
         return (
             <MainLayout onChangePage={onChangePage} className={pageId} pageId={pageId}>
                 <div data-testid="map-page-content">
-                    {/*<MapBox/>*/}
+                    <MapBox/>
                     <Grid container className="search_form_wrapper">
                         <Paper>
                             <form>
