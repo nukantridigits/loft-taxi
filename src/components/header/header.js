@@ -1,37 +1,77 @@
 import React, {Component} from 'react';
+import {AuthContext} from '../../contexts/authcontext';
+import PropTypes from 'prop-types';
 import Logo from '../logo';
+import AppBar from '@material-ui/core/AppBar';
+import ToolBar from '@material-ui/core/ToolBar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import PageList from "../../appData/pageList";
 import './header.scss';
 
 class Header extends Component {
+    static propTypes = {
+        menuItems: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                route: PropTypes.string.isRequired,
+                caption: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired,
+        currentPage: PropTypes.string.isRequired,
+        onChangePage: PropTypes.func
+    };
+
     menuItemClickHandler = (event) => {
         event.preventDefault();
 
+        let nextPage = '';
         let {target} = event;
-        let page = target.dataset.pageId;
 
-        return this.props.onChangePage(page);
+        if (target.tagName !== 'SPAN') {
+            nextPage = target.dataset.pageId;
+        } else {
+            let link = target.closest('a');
+
+            if (link) {
+                nextPage = link.dataset.pageId;
+            }
+        }
+
+        if (this.context) {
+            if (nextPage === PageList.login.id) {
+                this.context.logout();
+            }
+        }
+
+        return this.props.onChangePage(nextPage);
     };
 
     render() {
-        let {menuItems} = this.props;
+        let {menuItems, currentPage} = this.props;
 
-        let items = menuItems.map((item) =>
-            <li key={item.id}>
-                <a data-page-id={item.id} href='#' onClick={this.menuItemClickHandler}>
-                    {item.caption}
-                </a>
-            </li>
+        let topMenu = menuItems.map((item) =>
+            <Button key={item.id} href="#" className={currentPage === item.id ? 'active' : ''}
+                    data-page-id={item.id} onClick={this.menuItemClickHandler}>
+                {item.caption}
+            </Button>
         );
 
-        return <header className='header'>
-            <div className='header_content'>
-                <Logo/>
-                <ul className='top_menu'>
-                    {items}
-                </ul>
-            </div>
-        </header>;
+        return (
+            <AppBar data-testid="header" position="static" color="transparent" className="header">
+                <ToolBar>
+                    <Typography className="logo_wrapper">
+                        <Logo type="dark"/>
+                    </Typography>
+                    <Typography className="top_menu_wrapper">
+                        {topMenu}
+                    </Typography>
+                </ToolBar>
+            </AppBar>
+        );
     }
 }
+
+Header.contextType = AuthContext;
 
 export default Header;

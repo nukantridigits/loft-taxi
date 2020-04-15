@@ -1,9 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import {render, cleanup, within} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+    afterAll(cleanup);
+
+    let {getByTestId} = render(<App/>);
+    let appContainer = getByTestId('app');
+
+    it('App component render test', () => {
+        expect(appContainer).toBeInTheDocument();
+    });
+
+    it('App child component render test (LoginPage Component for example)', () => {
+        let innerComponent = within(appContainer).getByTestId('logout-layout');
+        expect(innerComponent).toBeTruthy();
+        expect(innerComponent.classList.contains('login_page_wrapper')).toBeTruthy();
+    });
 });

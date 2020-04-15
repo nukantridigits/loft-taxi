@@ -15,4 +15,14 @@
             margin-top: -70px;
         }
     }
+    .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+        display: none;
+    }
+}
+
+@media all and (min-width: 1170px) {
+    .wrapper {
+        width: 1170px;
+        margin: 0 auto;
+    }
 }
