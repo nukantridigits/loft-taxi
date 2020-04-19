@@ -25,7 +25,6 @@ class LoginForm extends Component {
     };
 
     static propTypes = {
-        onChangePage: PropTypes.func.isRequired,
         isRegForm: PropTypes.bool
     };
 
@@ -44,14 +43,14 @@ class LoginForm extends Component {
             this.context.login(login, password);
         }
 
-        return this.props.onChangePage(PageList.map.id);
+        // return this.props.onChangePage(PageList.map.id);
     };
 
     changePage = event => {
         event.preventDefault();
         let {target} = event;
 
-        return this.props.onChangePage(target.dataset.pageId);
+        // return this.props.onChangePage(target.dataset.pageId);
     };
 
     render() {

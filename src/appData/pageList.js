@@ -1,19 +1,35 @@
+import MapPage from "../pages/map";
+import ProfilePage from "../pages/profile";
+import LoginPage from "../pages/login";
+import SignupPage from "../pages/signup";
+
 const pageList = {
-    login: {
-        id: 'login',
-        route: '/login',
-    },
-    signup: {
-        id: 'signup',
-        route: '/signup',
-    },
     map: {
         id: 'map',
-        route: '/map',
+        path: '/map',
+        title: 'Карта',
+        component: MapPage,
+        private: true
     },
     profile: {
         id: 'profile',
-        route: '/profile',
+        path: '/profile',
+        title: 'Профиль',
+        component: ProfilePage,
+        private: true
+    },
+    login: {
+        id: 'login',
+        path: '/',
+        title: 'Выйти',
+        component: LoginPage,
+        exact: true
+    },
+    signup: {
+        id: 'signup',
+        path: '/signup',
+        component: SignupPage,
+        isNotInMenu: true,
     },
 };
 
