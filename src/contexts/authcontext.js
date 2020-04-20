@@ -1,32 +1,25 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
 export const AuthContext = React.createContext();
 
-export class AuthProvider extends Component {
-    constructor(props) {
-        super(props);
+export const AuthProvider = ({children}) => {
+    const [isAuthorized, setIsAuthorized] = useState(false);
 
-        this.state = {isLoggedIn: false};
-    }
-
-    login = (email, password) => {
-        return this.setState({isLoggedIn: !!email && !!password});
+    const login = (email, password) => {
+        return setIsAuthorized(!!email && !!password);
     };
 
-    logout = () => {
-        return this.setState({isLoggedIn: false});
+    const logout = () => {
+        return setIsAuthorized(false);
     };
 
-    render() {
-        let {children} = this.props;
-        return (
-            <AuthContext.Provider value={{
-                isLoggedIn: this.state.isLoggedIn,
-                login: this.login,
-                logout: this.logout
-            }}>
-                {children}
-            </AuthContext.Provider>
-        );
-    };
-}
+    return (
+        <AuthContext.Provider value={{
+            isAuthorized: isAuthorized,
+            login: login,
+            logout: logout
+        }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};

@@ -10,9 +10,9 @@ import './index.scss';
 ReactDOM.render(
     <BrowserRouter>
         <MuiThemeProvider theme={theme}>
-            {/*<AuthProvider>*/}
+            <AuthProvider>
                 <App/>
-            {/*</AuthProvider>*/}
+            </AuthProvider>
         </MuiThemeProvider>
     </BrowserRouter>
     , document.getElementById('root')

@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React,{useContext} from 'react';
 import {AuthContext} from "../../contexts/authcontext";
 import pageList from '../../appData/pageList';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
+import PrivateRoute from '../privateRoute'
 import './app.scss';
 
 const App = () => {
     const redirectPath = '/';
-    const isAuthorized = false;
+    const authContext = useContext(AuthContext);
+    console.log(authContext);
 
     return (
         <div className="app" id="app" data-testid="app">
@@ -30,7 +32,7 @@ const App = () => {
                             routeItem = <PrivateRoute
                                 component={route.component}
                                 path={path}
-                                isAuthorized={isAuthorized}
+                                isAuthorized={authContext.isAuthorized}
                                 redirectPath={redirectPath}
                                 key={id}
                                 exact={exact}
@@ -45,12 +47,5 @@ const App = () => {
         </div>
     );
 };
-
-const PrivateRoute = ({component: Component, isAuthorized, redirectPath, ...rest}) => (
-    <Route {...rest} render={(props) => (isAuthorized === true)
-        ? <Component {...props}/>
-        : <Redirect to={redirectPath}/>
-    }/>
-);
 
 export default App;
