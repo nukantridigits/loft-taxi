@@ -2,6 +2,7 @@ import MapPage from "../pages/map";
 import ProfilePage from "../pages/profile";
 import LoginPage from "../pages/login";
 import SignupPage from "../pages/signup";
+import NotFoundPage from "../pages/404";
 
 const pageList = {
     map: {
@@ -31,6 +32,11 @@ const pageList = {
         component: SignupPage,
         isNotInMenu: true,
     },
+    notFound: {
+        id: '404',
+        path : '*',
+        component: NotFoundPage
+    }
 };
 
 export default pageList;

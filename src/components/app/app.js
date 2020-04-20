@@ -8,7 +8,6 @@ import './app.scss';
 const App = () => {
     const redirectPath = '/';
     const authContext = useContext(AuthContext);
-    console.log(authContext);
 
     return (
         <div className="app" id="app" data-testid="app">
