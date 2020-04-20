@@ -25,8 +25,8 @@ const App = () => {
                             routeItem = <Route
                                 component={component}
                                 path={path}
-                                key={id}
                                 exact={exact}
+                                key={id}
                             />;
                         } else {
                             routeItem = <PrivateRoute
@@ -34,9 +34,8 @@ const App = () => {
                                 path={path}
                                 isAuthorized={authContext.isAuthorized}
                                 redirectPath={redirectPath}
-                                key={id}
                                 exact={exact}
-
+                                key={id}
                             />;
                         }
 
