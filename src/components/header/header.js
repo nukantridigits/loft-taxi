@@ -6,11 +6,23 @@ import ToolBar from '@material-ui/core/ToolBar';
 import Typography from '@material-ui/core/Typography';
 import pageList from "../../appData/pageList";
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {authLogout} from "../../modules/auth";
+
 import './header.scss';
 
-const Header = ({currentPage}) => {
+const Header = ({currentPage, authLogout}) => {
     Header.propTypes = {
         currentPage: PropTypes.string.isRequired
+    };
+
+    const menuClickHandler = (event) => {
+        let {target} = event;
+        let pageId = target.dataset.pageId;
+
+        if (pageId === pageList.login.id) {
+            authLogout();
+        }
     };
 
     const menu = Object.values(pageList).map(page => {
@@ -19,7 +31,7 @@ const Header = ({currentPage}) => {
 
             return (
                 <li key={pageId} className={pageId === currentPage ? 'active' : ''}>
-                    <Link to={page.path}>
+                    <Link to={page.path} onClick={menuClickHandler} data-page-id={pageId}>
                         {page.title}
                     </Link>
                 </li>
@@ -31,7 +43,7 @@ const Header = ({currentPage}) => {
         <AppBar data-testid="header" position="static" color="transparent" className="header">
             <ToolBar>
                 <Typography className="logo_wrapper">
-                    <Logo type="dark" />
+                    <Logo type="dark"/>
                 </Typography>
                 <div className="top_menu_wrapper">
                     <ul className="header_menu">
@@ -43,4 +55,11 @@ const Header = ({currentPage}) => {
     );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+        isAuthorized: state.auth.isAuthorized,
+    }
+);
+
+const mapDispatchToProps = {authLogout};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
