@@ -2,12 +2,13 @@ import {combineReducers} from 'redux';
 import {handleActions} from 'redux-actions';
 import {authRequest, authSuccess, authFailure, authLogout} from './actions';
 
-const initialState = {
+const defaultState = {
     isLoading: false,
     isAuthorized: false,
     errors: null,
     token: null,
 };
+
 
 const isLoading = handleActions(
     {
@@ -16,7 +17,7 @@ const isLoading = handleActions(
         [authFailure]: () => false,
         [authLogout]: () => false
     },
-    initialState.isAuthorized
+    defaultState.isLoading
 );
 
 const isAuthorized = handleActions(
@@ -26,7 +27,7 @@ const isAuthorized = handleActions(
         [authFailure]: () => false,
         [authLogout]: () => false
     },
-    initialState.isAuthorized
+    defaultState.isAuthorized
 );
 
 const errors = handleActions(
@@ -36,7 +37,7 @@ const errors = handleActions(
         [authFailure]: (_state, action) => action.payload,
         [authLogout]: () => null
     },
-    initialState.errors
+    defaultState.errors
 );
 
 const token = handleActions(
@@ -46,7 +47,7 @@ const token = handleActions(
         [authFailure]: () => null,
         [authLogout]: () => null
     },
-    initialState.token
+    defaultState.token
 );
 
 export default combineReducers({
