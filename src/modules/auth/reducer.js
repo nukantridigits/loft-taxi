@@ -9,7 +9,6 @@ const defaultState = {
     token: null,
 };
 
-
 const isLoading = handleActions(
     {
         [authRequest]: () => true,

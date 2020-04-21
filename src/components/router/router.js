@@ -3,9 +3,6 @@ import {Switch, Route} from 'react-router-dom';
 import PrivateRoute from '../privateRoute';
 import pageList from '../../appData/pageList';
 
-
-const redirectPath = '/';
-
 const Router = ({isAuthorized}) => {
     return (<Switch>
         {
@@ -28,7 +25,7 @@ const Router = ({isAuthorized}) => {
                         component={route.component}
                         path={path}
                         isAuthorized={isAuthorized}
-                        redirectPath={redirectPath}
+                        redirectPath={pageList.signup.path}
                         exact={exact}
                         key={id}
                     />;

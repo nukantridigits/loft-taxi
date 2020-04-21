@@ -9,6 +9,8 @@ import {Provider} from 'react-redux';
 import createStore from './store';
 import './index.scss';
 
+//todo получить локалсторэдж initialState и передать в createStore
+
 const store = createStore();
 
 ReactDOM.render(
