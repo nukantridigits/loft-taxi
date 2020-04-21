@@ -20,7 +20,7 @@ export const authMiddleware = store => next => action => {
                 }
             })
             .catch(error => {
-                console.error('authFailure',error);
+                console.error('authFailure', error);
                 store.dispatch(authFailure(error.error));
             });
     }

@@ -118,12 +118,10 @@ const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) =>
         );
 };
 
-const mapStateToProps = state => {
-    return {
-        isLoading: state.auth.isLoading,
-        isAuthorized: state.auth.isAuthorized,
-    }
-};
+const mapStateToProps = state => ({
+    isLoading: state.auth.isLoading,
+    isAuthorized: state.auth.isAuthorized,
+});
 
 const mapDispatchToProps = {authRequest};
 
