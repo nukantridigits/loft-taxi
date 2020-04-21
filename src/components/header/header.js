@@ -13,7 +13,7 @@ const Header = ({currentPage}) => {
         currentPage: PropTypes.string.isRequired
     };
 
-    let menu = Object.values(pageList).map(page => {
+    const menu = Object.values(pageList).map(page => {
         if (!page.isNotInMenu) {
             let pageId = page.id;
 

@@ -24,7 +24,7 @@ const pageList = {
         path: '/',
         title: 'Выйти',
         component: LoginPage,
-        exact: true
+        exact: true,
     },
     signup: {
         id: 'signup',

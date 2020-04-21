@@ -1,13 +1,12 @@
-import React,{useContext} from 'react';
-import {AuthContext} from "../../contexts/authcontext";
+import React from 'react';
 import pageList from '../../appData/pageList';
 import {Switch, Route} from 'react-router-dom';
-import PrivateRoute from '../privateRoute'
+import PrivateRoute from '../privateRoute';
 import './app.scss';
+import {connect} from "react-redux";
 
-const App = () => {
+const App = ({isAuthorized}) => {
     const redirectPath = '/';
-    const authContext = useContext(AuthContext);
 
     return (
         <div className="app" id="app" data-testid="app">
@@ -31,7 +30,7 @@ const App = () => {
                             routeItem = <PrivateRoute
                                 component={route.component}
                                 path={path}
-                                isAuthorized={authContext.isAuthorized}
+                                isAuthorized={isAuthorized}
                                 redirectPath={redirectPath}
                                 exact={exact}
                                 key={id}
@@ -46,4 +45,11 @@ const App = () => {
     );
 };
 
-export default App;
+
+const mapStateToProps = state => {
+    return {
+        isAuthorized: state.auth.isAuthorized,
+    }
+};
+
+export default connect(mapStateToProps)(App);

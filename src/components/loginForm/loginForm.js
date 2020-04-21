@@ -1,5 +1,4 @@
-import React, {useState, useContext} from 'react';
-import {AuthContext} from '../../contexts/authcontext';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -10,31 +9,34 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import PageList from "../../appData/pageList";
+import {connect} from 'react-redux';
 import './loginForm.scss';
+import {authRequest} from "../../modules/auth";
 
-const LoginForm = ({isRegForm = false}) => {
-    const authContext = useContext(AuthContext);
-    const [login, setLogin] = useState('');
+const LoginForm = ({isRegForm = false, authRequest, isLoading}) => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     LoginForm.propTypes = {
         isRegForm: PropTypes.bool
     };
 
-    const handleLoginChange = event => {
-        return setLogin(event.target.value);
+    const handleEmailChange = event => {
+        return setEmail(event.target.value);
     };
 
     const handlePasswordChange = event => {
         return setPassword(event.target.value);
     };
 
-    const formSubmitHandler = (event) => {
+    const onFormSubmitHandler = event => {
         event.preventDefault();
 
-        if (authContext) {
-            authContext.login(login, password);
+        if (!isRegForm && !!email && !!password) {
+            authRequest({email, password});
         }
+
+        //todo isRegForm &&...
     };
 
     let formMainClass = isRegForm ? 'form_signup' : 'form_login';
@@ -45,7 +47,7 @@ const LoginForm = ({isRegForm = false}) => {
 
     return (
         <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="auth-form"
-              onSubmit={formSubmitHandler}>
+              onSubmit={onFormSubmitHandler}>
             <Grid container>
                 <Grid item xs={12}>
                     <Typography variant="h4" component="h1">
@@ -63,10 +65,10 @@ const LoginForm = ({isRegForm = false}) => {
 
                 <Grid item xs={12}>
                     <FormControl fullWidth={true} className="form_control">
-                        <InputLabel htmlFor="login">
+                        <InputLabel htmlFor="email">
                             {loginLabelText}
                         </InputLabel>
-                        <Input id="login" data-testid="login-input" value={login} onChange={handleLoginChange}
+                        <Input id="email" data-testid="email-input" value={email} onChange={handleEmailChange}
                                required/>
                     </FormControl>
                 </Grid>
@@ -103,7 +105,8 @@ const LoginForm = ({isRegForm = false}) => {
                 </Grid>
 
                 <Grid item xs={12} align="right" className="form_footer">
-                    <Button data-testid="form-submit-btn" size="large" type="submit" variant="contained"
+                    <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
+                            variant="contained"
                             color="primary">
                         Войти
                     </Button>
@@ -113,4 +116,12 @@ const LoginForm = ({isRegForm = false}) => {
     );
 };
 
-export default LoginForm;
+const mapStateToProps = state => {
+    return {
+        isLoading: state.auth.isLoading,
+    }
+};
+
+const mapDispatchToProps = {authRequest};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

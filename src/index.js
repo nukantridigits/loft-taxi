@@ -5,15 +5,21 @@ import App from './components/app';
 import {theme} from "loft-taxi-mui-theme";
 import {MuiThemeProvider} from "@material-ui/core/styles";
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import createStore from './store';
 import './index.scss';
 
+const store = createStore();
+
 ReactDOM.render(
-    <BrowserRouter>
-        <MuiThemeProvider theme={theme}>
-            <AuthProvider>
-                <App/>
-            </AuthProvider>
-        </MuiThemeProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <MuiThemeProvider theme={theme}>
+                <AuthProvider>
+                    <App/>
+                </AuthProvider>
+            </MuiThemeProvider>
+        </BrowserRouter>
+    </Provider>
     , document.getElementById('root')
 );
