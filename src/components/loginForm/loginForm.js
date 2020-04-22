@@ -11,12 +11,15 @@ import Button from "@material-ui/core/Button";
 import PageList from "../../appData/pageList";
 import {connect} from 'react-redux';
 import {authRequest} from "../../modules/auth";
+import {regRequest} from "../../modules/reg";
 import './loginForm.scss';
 
 
-const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) => {
+const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAuthorized}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
 
     LoginForm.propTypes = {
         isRegForm: PropTypes.bool
@@ -30,14 +33,24 @@ const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) =>
         return setPassword(event.target.value);
     };
 
+    const handleNameChange = event => {
+        return setName(event.target.value);
+    };
+
+    const handleSurnameChange = event => {
+        return setSurname(event.target.value);
+    };
+
     const onFormSubmitHandler = event => {
         event.preventDefault();
 
         if (!isRegForm && !!email && !!password) {
-            authRequest({email, password});
+            return authRequest({email, password});
         }
 
-        //todo isRegForm &&...
+        if (isRegForm && !!email && !!password && !!name && !!surname) {
+            return regRequest({email, password, name, surname});
+        }
     };
 
     let formMainClass = isRegForm ? 'form_signup' : 'form_login';
@@ -82,7 +95,8 @@ const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) =>
                                 <InputLabel htmlFor="name">
                                     Имя
                                 </InputLabel>
-                                <Input id="name" data-testid="name-input" required/>
+                                <Input id="name" data-testid="name-input"
+                                       onChange={handleNameChange} required/>
                             </FormControl>
                         </Grid>
                         <Grid item sm={6}>
@@ -90,7 +104,8 @@ const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) =>
                                 <InputLabel htmlFor="surname">
                                     Фамилия
                                 </InputLabel>
-                                <Input id="surname" data-testid="surname-input" required/>
+                                <Input id="surname" data-testid="surname-input"
+                                       onChange={handleSurnameChange} required/>
                             </FormControl>
                         </Grid>
                     </Grid>
@@ -119,10 +134,10 @@ const LoginForm = ({isRegForm = false, authRequest, isLoading, isAuthorized}) =>
 };
 
 const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading,
+    isLoading: state.auth.isLoading || state.reg.isLoading,
     isAuthorized: state.auth.isAuthorized,
 });
 
-const mapDispatchToProps = {authRequest};
+const mapDispatchToProps = {authRequest, regRequest};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

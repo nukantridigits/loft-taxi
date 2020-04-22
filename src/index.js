@@ -6,12 +6,11 @@ import {theme} from "loft-taxi-mui-theme";
 import {MuiThemeProvider} from "@material-ui/core/styles";
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
+import {getLocalStorageState} from './modules/localStorage/localStorage';
 import createStore from './store';
 import './index.scss';
 
-//todo получить локалсторэдж initialState и передать в createStore
-
-const store = createStore();
+const store = createStore(getLocalStorageState());
 
 ReactDOM.render(
     <Provider store={store}>

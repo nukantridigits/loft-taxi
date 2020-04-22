@@ -14,7 +14,7 @@ const isLoading = handleActions(
         [authRequest]: () => true,
         [authSuccess]: () => false,
         [authFailure]: () => false,
-        [authLogout]: () => false
+        [authLogout]: () => false,
     },
     defaultState.isLoading
 );

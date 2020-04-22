@@ -1,4 +1,4 @@
-const getState = () => {
+export const getLocalStorageState = () => {
     if (localStorage.length) {
         let state = localStorage.getItem('state');
 
@@ -10,8 +10,6 @@ const getState = () => {
     }
 };
 
-const setState = (store) => {
+export const setLocalStorageState = (store) => {
     return localStorage.setItem('state', JSON.stringify(store));
 };
-
-export default {getState, setState};
