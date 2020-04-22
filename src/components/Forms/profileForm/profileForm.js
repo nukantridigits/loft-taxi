@@ -8,14 +8,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
-
-import PageList from "../../../appData/pageList";
 import {connect} from 'react-redux';
 
 import './profileForm.scss';
 
 
-const ProfileForm = ({isLoading = false,}) => {
+const ProfileForm = ({isLoading = false}) => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cardName, setCardName] = useState('');
@@ -63,48 +61,49 @@ const ProfileForm = ({isLoading = false,}) => {
                     </Typography>
                 </Grid>
 
-                <Grid container className="cards_row">
+                <Grid container className="cards_row" justify="center" spacing={4}>
                     <Grid item sm={6}>
-                        <Card>
-                            <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="cardNumber">
-                                    Номер карты
-                                </InputLabel>
-                                <Input id="cardNumber" data-testid="cardNumber-input" value={cardNumber}
-                                       onChange={handleCardNumberChange} required/>
-                            </FormControl>
-
-                            <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="expiryDate">
-                                    Срок действия
-                                </InputLabel>
-                                <Input id="expiryDate" data-testid="expiryDate-input" value={expiryDate}
-                                       onChange={handleExpiryDateChange} required/>
-                            </FormControl>
+                        <Card className="card">
+                            <Grid container direction="column" justify="space-around" className="card_col">
+                                <FormControl fullWidth={true} className="form_control">
+                                    <InputLabel htmlFor="cardNumber">
+                                        Номер карты
+                                    </InputLabel>
+                                    <Input id="cardNumber" data-testid="cardNumber-input" value={cardNumber}
+                                           onChange={handleCardNumberChange} required/>
+                                </FormControl>
+                                <FormControl fullWidth={true} className="form_control">
+                                    <InputLabel htmlFor="expiryDate">
+                                        Срок действия
+                                    </InputLabel>
+                                    <Input id="expiryDate" data-testid="expiryDate-input" value={expiryDate}
+                                           onChange={handleExpiryDateChange} required/>
+                                </FormControl>
+                            </Grid>
                         </Card>
                     </Grid>
 
                     <Grid item sm={6}>
-                        <Card>
-                            <FormControl fullWidth={true} className="form_control">
+                        <Card className="card">
+                            <Grid container direction="column" justify="space-around" className="card_col">
+                                <FormControl fullWidth={true} className="form_control">
                                 <InputLabel htmlFor="cardNumber">
                                     Имя владельца
                                 </InputLabel>
                                 <Input id="cardName" data-testid="cardName-input" value={cardName}
                                        onChange={handleCardNameChange} required/>
                             </FormControl>
-
-                            <FormControl fullWidth={true} className="form_control">
+                                <FormControl fullWidth={true} className="form_control">
                                 <InputLabel htmlFor="expiryDate">
                                     CVC
                                 </InputLabel>
                                 <Input id="cvc" data-testid="cvc-input" value={cvc}
                                        onChange={handleCvcChange} required/>
                             </FormControl>
+                            </Grid>
                         </Card>
                     </Grid>
                 </Grid>
-
 
                 <Grid item xs={12} align="center" className="form_footer">
                     <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
