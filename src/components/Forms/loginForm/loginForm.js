@@ -8,9 +8,9 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
-import PageList from "../../appData/pageList";
+import PageList from "../../../appData/pageList";
 import {connect} from 'react-redux';
-import {authRequest, regRequest} from "../../modules/auth";
+import {authRequest, regRequest} from "../../../modules/auth";
 import './loginForm.scss';
 
 

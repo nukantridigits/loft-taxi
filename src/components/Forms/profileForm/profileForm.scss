@@ -1,0 +1,22 @@
+.form_wrapper {
+    padding: 62px 73px 72px;
+    .form_profile {
+        &_header {
+            margin-bottom: 50px;
+            h1 {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .MuiCard-root {
+        width: 385px;
+        height: 230px;
+        position: relative;
+        //padding: 16px 32px;
+    }
+
+    .cards_row {
+        margin-bottom: 47px;
+    }
+}

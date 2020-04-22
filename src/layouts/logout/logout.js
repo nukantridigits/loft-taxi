@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoginForm from "../../components/loginForm";
+import LoginForm from "../../components/Forms/loginForm";
 import Logo from "../../components/logo";
 import PageList from "../../appData/pageList";
 import Grid from "@material-ui/core/Grid";

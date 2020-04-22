@@ -35,7 +35,8 @@ const pageList = {
     notFound: {
         id: '404',
         path : '*',
-        component: NotFoundPage
+        component: NotFoundPage,
+        isNotInMenu: true,
     }
 };
 

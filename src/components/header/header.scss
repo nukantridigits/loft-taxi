@@ -1,5 +1,5 @@
 .header {
-    >div{
+    > div {
         padding: 0;
         width: 1170px;
         margin: 0 auto;
@@ -13,11 +13,32 @@
         display: flex;
         align-items: center;
     }
-    &_menu{
+    &_menu {
         padding: 0;
         margin: 0;
         display: flex;
         list-style: none;
+        li {
+            //margin-right: 22px;
+            a {
+                color: #333;
+                text-decoration: none;
+                padding: 6px 10px;
+                border-radius: 4px;
+                &:hover {
+                    text-decoration: none;
+                    background-color: rgba(0, 0, 0, 0.08);
+                }
+            }
+            &:last-of-type {
+                margin-right: 0;
+            }
+            &.active {
+                a {
+                    background-color: rgba(0, 0, 0, 0.08);
+                }
+            }
+        }
     }
     .top_menu_wrapper {
         a {

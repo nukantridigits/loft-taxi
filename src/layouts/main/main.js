@@ -7,7 +7,7 @@ const MainLayout = ({children, pageId, className}) => {
         <div data-testid="main-layout" className={`main_wrapper ${className}_page_wrapper`}>
             <Header currentPage={pageId} />
             <div className='main_content'>
-                <div className={`content ${className}_content`}>
+                <div className={`content ${className}_content wrapper`}>
                     {children}
                 </div>
             </div>
