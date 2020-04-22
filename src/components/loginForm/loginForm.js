@@ -10,8 +10,7 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import PageList from "../../appData/pageList";
 import {connect} from 'react-redux';
-import {authRequest} from "../../modules/auth";
-import {regRequest} from "../../modules/reg";
+import {authRequest, regRequest} from "../../modules/auth";
 import './loginForm.scss';
 
 
@@ -134,7 +133,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAut
 };
 
 const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading || state.reg.isLoading,
+    isLoading: state.auth.isLoading,
     isAuthorized: state.auth.isAuthorized,
 });
 

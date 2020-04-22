@@ -1,16 +1,12 @@
-import {authRequest, authSuccess, authFailure} from "./actions";
-import env from '../../appData/env';
+import {authRequest, authSuccess, authFailure, regRequest} from "./actions";
+import {request} from '../../helpers/loftTaxiApi';
 
-const baseUrl = env.LOFT_TAXI_API_URL;
+const AUTH = 'auth';
+const REGISTER = 'register';
 
 export const authMiddleware = store => next => action => {
     if (action.type === authRequest.toString()) {
-        fetch(`${baseUrl}auth`,
-            {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(action.payload)
-            })
+        request(AUTH, action.payload)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
@@ -20,7 +16,19 @@ export const authMiddleware = store => next => action => {
                 }
             })
             .catch(error => {
-                console.error('authFailure', error);
+                store.dispatch(authFailure(error.error));
+            });
+    } else if (action.type === regRequest.toString()) {
+        request(REGISTER, action.payload)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    store.dispatch(authSuccess(data.token));
+                } else {
+                    store.dispatch(authFailure(data.error));
+                }
+            })
+            .catch(error => {
                 store.dispatch(authFailure(error.error));
             });
     }

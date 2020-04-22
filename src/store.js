@@ -1,7 +1,6 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import {authMiddleware} from './modules/auth';
-import {regMiddleware} from './modules/reg';
-import {setLocalStorageState} from './modules/localStorage/localStorage';
+import {setLocalStorageState} from './helpers/localStorage';
 import rootReducer from './modules';
 
 const createAppStore = (initialState) => {
@@ -9,7 +8,7 @@ const createAppStore = (initialState) => {
         rootReducer,
         initialState,
         compose(
-            applyMiddleware(authMiddleware, regMiddleware),
+            applyMiddleware(authMiddleware),
             window.__REDUX_DEVTOOLS_EXTENSION__
                 ? window.__REDUX_DEVTOOLS_EXTENSION__()
                 : noop => noop,
