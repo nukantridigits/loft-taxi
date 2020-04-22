@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-// import Link from "@material-ui/core/Link";
 import {Link, Redirect} from 'react-router-dom';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,7 +9,7 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import PageList from "../../../appData/pageList";
 import {connect} from 'react-redux';
-import {authRequest, regRequest} from "../../../modules/auth";
+import {authRequest, getIsAuthorized, getIsLoading, regRequest} from "../../../modules/auth";
 import './loginForm.scss';
 
 
@@ -133,8 +132,8 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAut
 };
 
 const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading,
-    isAuthorized: state.auth.isAuthorized,
+    isLoading: getIsLoading(state),
+    isAuthorized: getIsAuthorized(state),
 });
 
 const mapDispatchToProps = {authRequest, regRequest};

@@ -1,6 +1,8 @@
+const STORE_ITEM = 'store';
+
 export const getLocalStorageState = () => {
     if (localStorage.length) {
-        let store = localStorage.getItem('store');
+        let store = localStorage.getItem(STORE_ITEM);
 
         if (store) {
             return JSON.parse(store);
@@ -11,5 +13,15 @@ export const getLocalStorageState = () => {
 };
 
 export const setLocalStorageState = (store) => {
-    return localStorage.setItem('store', JSON.stringify(store));
+    return localStorage.setItem(STORE_ITEM, JSON.stringify(store));
+};
+
+export const cleanLocalStorageState = () => {
+    if (localStorage.length) {
+        let store = localStorage.getItem(STORE_ITEM);
+
+        if (store) {
+            return localStorage.removeItem(STORE_ITEM);
+        }
+    }
 };

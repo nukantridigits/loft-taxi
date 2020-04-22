@@ -2,6 +2,8 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import PrivateRoute from './privateRoute';
 import pageList from '../../appData/pageList';
+import {getIsAuthorized} from "../../modules/auth";
+import {connect} from "react-redux";
 
 const Router = ({isAuthorized}) => {
     return (<Switch>
@@ -37,4 +39,8 @@ const Router = ({isAuthorized}) => {
     </Switch>)
 };
 
-export default Router;
+const mapStateToProps = state => ({
+    isAuthorized: getIsAuthorized(state),
+});
+
+export default connect(mapStateToProps)(Router);

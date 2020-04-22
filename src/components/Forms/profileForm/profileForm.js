@@ -1,27 +1,40 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import {Link, Redirect} from 'react-router-dom';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
+import {getCardRequest, setCardRequest,getIsLoading, getIsExist, getData} from '../../../modules/card';
+import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
-
 import './profileForm.scss';
 
-
-const ProfileForm = ({isLoading = false}) => {
+const ProfileForm = ({isLoading, isExist, getCardRequest, setCardRequest, card, token}) => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cardName, setCardName] = useState('');
     const [cvc, setCvc] = useState('');
 
-    /* ProfileForm.propTypes = {
-         isRegForm: PropTypes.bool
-     };*/
+    useEffect(() => {
+        if (!isExist) {
+            getCardRequest({token});
+        }
+    }, []);
+
+    const onFormSubmitHandler = event => {
+        event.preventDefault();
+
+        if (!!cardNumber && !!expiryDate && !!cardName && !!cvc && !!token) {
+            return setCardRequest({
+                cardNumber, expiryDate, cardName, cvc, token
+            });
+        }
+
+        return false;
+    };
 
     const handleCardNumberChange = event => {
         return setCardNumber(event.target.value);
@@ -39,19 +52,10 @@ const ProfileForm = ({isLoading = false}) => {
         return setCvc(event.target.value);
     };
 
-    const onFormSubmitHandler = event => {
-        event.preventDefault();
-        /*if (!!cardNumber && !!expiryDate && !!cardName && !!cvc && !!token) {
-            return cardSaveRequest({
-                cardNumber, expiryDate, cardName, cvc, token
-            });
-        }     */
-    };
-
     return (
         <form className="form_profile form_wrapper"
               onSubmit={onFormSubmitHandler}>
-            <Grid container align="center" >
+            <Grid container align="center">
                 <Grid item xs={12} className="form_profile_header ">
                     <Typography variant="h4" component="h1">
                         Профиль
@@ -69,14 +73,14 @@ const ProfileForm = ({isLoading = false}) => {
                                     <InputLabel htmlFor="cardNumber">
                                         Номер карты
                                     </InputLabel>
-                                    <Input id="cardNumber" data-testid="cardNumber-input" value={cardNumber}
+                                    <Input id="cardNumber" data-testid="cardNumber-input" value={card.cardNumber}
                                            onChange={handleCardNumberChange} required/>
                                 </FormControl>
                                 <FormControl fullWidth={true} className="form_control">
                                     <InputLabel htmlFor="expiryDate">
                                         Срок действия
                                     </InputLabel>
-                                    <Input id="expiryDate" data-testid="expiryDate-input" value={expiryDate}
+                                    <Input id="expiryDate" data-testid="expiryDate-input" value={card.expiryDate}
                                            onChange={handleExpiryDateChange} required/>
                                 </FormControl>
                             </Grid>
@@ -87,19 +91,19 @@ const ProfileForm = ({isLoading = false}) => {
                         <Card className="card">
                             <Grid container direction="column" justify="space-around" className="card_col">
                                 <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="cardNumber">
-                                    Имя владельца
-                                </InputLabel>
-                                <Input id="cardName" data-testid="cardName-input" value={cardName}
-                                       onChange={handleCardNameChange} required/>
-                            </FormControl>
+                                    <InputLabel htmlFor="cardNumber">
+                                        Имя владельца
+                                    </InputLabel>
+                                    <Input id="cardName" data-testid="cardName-input" value={card.cardName}
+                                           onChange={handleCardNameChange} required/>
+                                </FormControl>
                                 <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="expiryDate">
-                                    CVC
-                                </InputLabel>
-                                <Input id="cvc" data-testid="cvc-input" value={cvc}
-                                       onChange={handleCvcChange} required/>
-                            </FormControl>
+                                    <InputLabel htmlFor="expiryDate">
+                                        CVC
+                                    </InputLabel>
+                                    <Input id="cvc" data-testid="cvc-input" value={card.cvc}
+                                           onChange={handleCvcChange} required/>
+                                </FormControl>
                             </Grid>
                         </Card>
                     </Grid>
@@ -117,11 +121,13 @@ const ProfileForm = ({isLoading = false}) => {
     );
 };
 
-/*const mapStateToProps = state => ({
-    isLoading: state.auth.isLoading,
-    isAuthorized: state.auth.isAuthorized,
+const mapStateToProps = state => ({
+    isLoading: getIsLoading(state),
+    isExist: getIsExist(state),
+    card: getData(state),
+    token: getToken(state)
 });
 
-const mapDispatchToProps = {authRequest, regRequest};*/
+const mapDispatchToProps = {setCardRequest, getCardRequest};
 
-export default ProfileForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

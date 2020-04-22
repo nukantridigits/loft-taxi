@@ -8,10 +8,12 @@ import pageList from "../../appData/pageList";
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {authLogout} from "../../modules/auth";
+import {setProfileDefault} from "../../modules/card";
+import {cleanLocalStorageState} from '../../helpers/localStorage';
 
 import './header.scss';
 
-const Header = ({currentPage, authLogout}) => {
+const Header = ({currentPage, authLogout, setProfileDefault}) => {
     Header.propTypes = {
         currentPage: PropTypes.string.isRequired
     };
@@ -22,6 +24,8 @@ const Header = ({currentPage, authLogout}) => {
 
         if (pageId === pageList.login.id) {
             authLogout();
+            setProfileDefault();
+            cleanLocalStorageState();
         }
     };
 
@@ -60,6 +64,6 @@ const mapStateToProps = state => ({
     }
 );
 
-const mapDispatchToProps = {authLogout};
+const mapDispatchToProps = {authLogout, setProfileDefault};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
