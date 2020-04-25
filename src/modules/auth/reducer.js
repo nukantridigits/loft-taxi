@@ -25,11 +25,9 @@ const isLoading = handleActions(
 
 const isAuthorized = handleActions(
     {
-        [authRequest]: () => false,
         [authSuccess]: () => true,
         [authFailure]: () => false,
         [authLogout]: () => false,
-        [regRequest]: () => false,
     },
     defaultState.isAuthorized
 );
@@ -37,7 +35,6 @@ const isAuthorized = handleActions(
 const errors = handleActions(
     {
         [authRequest]: () => null,
-        [authSuccess]: () => null,
         [authFailure]: (_state, action) => action.payload,
         [authLogout]: () => null,
         [regRequest]: () => null,

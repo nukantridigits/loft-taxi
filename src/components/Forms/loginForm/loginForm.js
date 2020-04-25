@@ -57,78 +57,77 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAut
     let linkBtnText = isRegForm ? ' Войти' : ' Зарегистрируйтесь';
     let loginLabelText = isRegForm ? 'Адрес электронной почты' : 'Имя пользователя';
 
-    return isAuthorized ?
-        (<Redirect to={PageList.map.path}/>) : (
-            <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="auth-form"
-                  onSubmit={onFormSubmitHandler}>
-                <Grid container>
-                    <Grid item xs={12}>
-                        <Typography variant="h4" component="h1">
-                            {headerText}
-                        </Typography>
-                        <Typography component="p">
-                            {linkWrapperText}
-                            <Link to={!isRegForm ? PageList.signup.path : PageList.login.path}
-                                  data-testid="change-form-page-link"
-                                  data-page-id={!isRegForm ? PageList.signup.id : PageList.login.id}>
-                                {linkBtnText}
-                            </Link>
-                        </Typography>
-                    </Grid>
+    return (
+        <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="auth-form"
+              onSubmit={onFormSubmitHandler}>
+            <Grid container>
+                <Grid item xs={12}>
+                    <Typography variant="h4" component="h1">
+                        {headerText}
+                    </Typography>
+                    <Typography component="p">
+                        {linkWrapperText}
+                        <Link to={!isRegForm ? PageList.signup.path : PageList.login.path}
+                              data-testid="change-form-page-link"
+                              data-page-id={!isRegForm ? PageList.signup.id : PageList.login.id}>
+                            {linkBtnText}
+                        </Link>
+                    </Typography>
+                </Grid>
 
-                    <Grid item xs={12}>
+                <Grid item xs={12}>
+                    <FormControl fullWidth={true} className="form_control">
+                        <InputLabel htmlFor="email">
+                            {loginLabelText}
+                        </InputLabel>
+                        <Input id="email" data-testid="email-input" value={email} onChange={handleEmailChange}
+                               required/>
+                    </FormControl>
+                </Grid>
+
+                {isRegForm &&
+                <Grid container spacing={2}>
+                    <Grid item sm={6}>
                         <FormControl fullWidth={true} className="form_control">
-                            <InputLabel htmlFor="email">
-                                {loginLabelText}
+                            <InputLabel htmlFor="name">
+                                Имя
                             </InputLabel>
-                            <Input id="email" data-testid="email-input" value={email} onChange={handleEmailChange}
-                                   required/>
+                            <Input id="name" data-testid="name-input"
+                                   onChange={handleNameChange} required/>
                         </FormControl>
                     </Grid>
-
-                    {isRegForm &&
-                    <Grid container spacing={2}>
-                        <Grid item sm={6}>
-                            <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="name">
-                                    Имя
-                                </InputLabel>
-                                <Input id="name" data-testid="name-input"
-                                       onChange={handleNameChange} required/>
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={6}>
-                            <FormControl fullWidth={true} className="form_control">
-                                <InputLabel htmlFor="surname">
-                                    Фамилия
-                                </InputLabel>
-                                <Input id="surname" data-testid="surname-input"
-                                       onChange={handleSurnameChange} required/>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
-                    }
-
-                    <Grid item xs={12}>
+                    <Grid item sm={6}>
                         <FormControl fullWidth={true} className="form_control">
-                            <InputLabel htmlFor="password">
-                                Пароль
+                            <InputLabel htmlFor="surname">
+                                Фамилия
                             </InputLabel>
-                            <Input id="password" data-testid="password-input" value={password}
-                                   onChange={handlePasswordChange} required/>
+                            <Input id="surname" data-testid="surname-input"
+                                   onChange={handleSurnameChange} required/>
                         </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12} align="right" className="form_footer">
-                        <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
-                                variant="contained"
-                                color="primary">
-                            Войти
-                        </Button>
                     </Grid>
                 </Grid>
-            </form>
-        );
+                }
+
+                <Grid item xs={12}>
+                    <FormControl fullWidth={true} className="form_control">
+                        <InputLabel htmlFor="password">
+                            Пароль
+                        </InputLabel>
+                        <Input id="password" data-testid="password-input" value={password}
+                               onChange={handlePasswordChange} required/>
+                    </FormControl>
+                </Grid>
+
+                <Grid item xs={12} align="right" className="form_footer">
+                    <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
+                            variant="contained"
+                            color="primary">
+                        Войти
+                    </Button>
+                </Grid>
+            </Grid>
+        </form>
+    );
 };
 
 const mapStateToProps = state => ({
