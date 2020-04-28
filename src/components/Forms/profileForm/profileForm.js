@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
@@ -7,12 +6,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
-import {getCardRequest, setCardRequest,getIsLoading, getIsExist, getData} from '../../../modules/card';
+import {getCardRequest, setCardRequest, getIsLoading, getIsExist, getData} from '../../../modules/card';
 import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
 import './profileForm.scss';
 
-const ProfileForm = ({isLoading, isExist, getCardRequest, setCardRequest, card, token}) => {
+const ProfileForm = (props) => {
+    const {isExist, token, isLoading, getCardRequest, setCardRequest} = props;
+
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cardName, setCardName] = useState('');
@@ -73,14 +74,14 @@ const ProfileForm = ({isLoading, isExist, getCardRequest, setCardRequest, card, 
                                     <InputLabel htmlFor="cardNumber">
                                         Номер карты
                                     </InputLabel>
-                                    <Input id="cardNumber" data-testid="cardNumber-input" value={card.cardNumber}
+                                    <Input id="cardNumber" data-testid="cardNumber-input"
                                            onChange={handleCardNumberChange} required/>
                                 </FormControl>
                                 <FormControl fullWidth={true} className="form_control">
                                     <InputLabel htmlFor="expiryDate">
                                         Срок действия
                                     </InputLabel>
-                                    <Input id="expiryDate" data-testid="expiryDate-input" value={card.expiryDate}
+                                    <Input id="expiryDate" data-testid="expiryDate-input"
                                            onChange={handleExpiryDateChange} required/>
                                 </FormControl>
                             </Grid>
@@ -94,14 +95,14 @@ const ProfileForm = ({isLoading, isExist, getCardRequest, setCardRequest, card, 
                                     <InputLabel htmlFor="cardNumber">
                                         Имя владельца
                                     </InputLabel>
-                                    <Input id="cardName" data-testid="cardName-input" value={card.cardName}
+                                    <Input id="cardName" data-testid="cardName-input"
                                            onChange={handleCardNameChange} required/>
                                 </FormControl>
                                 <FormControl fullWidth={true} className="form_control">
                                     <InputLabel htmlFor="expiryDate">
                                         CVC
                                     </InputLabel>
-                                    <Input id="cvc" data-testid="cvc-input" value={card.cvc}
+                                    <Input id="cvc" data-testid="cvc-input"
                                            onChange={handleCvcChange} required/>
                                 </FormControl>
                             </Grid>

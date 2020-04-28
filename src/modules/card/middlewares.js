@@ -22,9 +22,7 @@ export const cardMiddleware = store => next => action => {
             .catch(error => {
                 store.dispatch(setCardFailure(error.error));
             });
-    }
-    else if (action.type === getCardRequest.toString()) {
-        console.log('middleware before getCardRequest');
+    } else if (action.type === getCardRequest.toString()) {
         request(CARD, action.payload, true)
             .then(response => response.json())
             .then(data => {
