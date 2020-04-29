@@ -1,0 +1,26 @@
+.form_wrapper {
+    padding: 62px 73px 72px;
+    .form_profile {
+        &_header {
+            margin-bottom: 50px;
+            h1 {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .card {
+        width: 319px;
+        height: 162px;
+        position: relative;
+        padding: 30px;
+        box-shadow: 0 0 26px rgba(0, 0, 0, 0.05), 0 15px 10px rgba(0, 0, 0, 0.06);
+        &_col{
+            height: 100%;
+        }
+    }
+
+    .cards_row {
+        margin-bottom: 47px;
+    }
+}

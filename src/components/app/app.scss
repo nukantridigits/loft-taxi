@@ -18,6 +18,12 @@
     .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
         display: none;
     }
+
+    button {
+        &:hover{
+            background-color: #eeb60c;
+        }
+    }
 }
 
 @media all and (min-width: 1170px) {
