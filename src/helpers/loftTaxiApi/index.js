@@ -1,10 +1,10 @@
 import env from "../../appData/env";
 
 const baseUrl = env.LOFT_TAXI_API_URL;
-export const TRANSPORT_ERROR = 'Не удалось получить данные от сервера: ';
+export const TRANSPORT_ERROR_MSG = 'Не удалось получить данные от сервера: ';
 
 const urlCreate = (payload, type, isGet) => {
-    let url = `${baseUrl}${type}`;
+    const url = `${baseUrl}${type}`;
 
     if (!isGet) {
         return url;
@@ -42,9 +42,3 @@ export const request = (type, payload, isGet = false) => {
     return fetch(url, config).
             then(response => response.json());
 };
-
-
-/*
-const authRequestApi = payload => request(AUTH, payload);
-
-export {authRequestApi};*/
