@@ -1,9 +1,9 @@
 import {authSuccess, authFailure} from "./actions";
 import {call, put} from 'redux-saga/effects';
-import {request} from '../../helpers/loftTaxiApi';
+import {request, TRANSPORT_ERROR} from '../../helpers/loftTaxiApi';
 
 const AUTH = 'auth';
-const REGISTER = 'register1';
+const REGISTER = 'register';
 
 export function* handleAuthotization(action) {
     try {
@@ -16,7 +16,7 @@ export function* handleAuthotization(action) {
             yield put(authFailure(error));
         }
     } catch (error) {
-        yield put(authFailure(error.message));
+        yield put(authFailure(TRANSPORT_ERROR + error.message));
     }
 }
 
@@ -31,6 +31,6 @@ export function* handleRegistration(action) {
             yield put(authFailure(error));
         }
     } catch (error) {
-        yield put(authFailure(error.message));
+        yield put(authFailure(TRANSPORT_ERROR + error.message));
     }
 }

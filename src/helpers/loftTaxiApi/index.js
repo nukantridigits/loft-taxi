@@ -1,6 +1,7 @@
 import env from "../../appData/env";
 
 const baseUrl = env.LOFT_TAXI_API_URL;
+export const TRANSPORT_ERROR = 'Не удалось получить данные от сервера: ';
 
 const urlCreate = (payload, type, isGet) => {
     let url = `${baseUrl}${type}`;
