@@ -6,7 +6,6 @@ import rootReducer from './modules';
 
 const sagaMiddleware = createSagaMiddleware();
 
-// const createAppStore = (initialState) => {
 const createAppStore = (initialState) => {
     const store = createStore(
         rootReducer,
@@ -18,11 +17,11 @@ const createAppStore = (initialState) => {
         ),
     );
 
-    /*store.subscribe(() => {
+    store.subscribe(() => {
         setLocalStorageState({
             auth: store.getState().auth
         })
-    });*/
+    });
 
     sagaMiddleware.run(rootSaga);
 
