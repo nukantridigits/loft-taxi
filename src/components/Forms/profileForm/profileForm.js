@@ -11,9 +11,7 @@ import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
 import './profileForm.scss';
 
-const ProfileForm = (props) => {
-    const {isExist, token, isLoading, getCardRequest, setCardRequest} = props;
-
+const ProfileForm = ({isExist, token, isLoading, getCardRequest, setCardRequest}) => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cardName, setCardName] = useState('');
