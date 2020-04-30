@@ -61,8 +61,8 @@ const errors = handleActions({
         [setCardSuccess]: () => null,
         [getCardRequest]: () => null,
         [getCardSuccess]: () => null,
-        [setCardFailure]: () => (_state, action) => action.payload,
-        [getCardFailure]: () => (_state, action) => action.payload,
+        [setCardFailure]: (_state, action) => action.payload,
+        [getCardFailure]: (_state, action) => action.payload,
         [setProfileDefault]: () => defaultState.errors,
     },
     defaultState.errors

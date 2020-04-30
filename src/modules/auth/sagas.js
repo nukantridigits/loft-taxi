@@ -5,7 +5,7 @@ import {request, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
 const AUTH = 'auth';
 const REGISTER = 'register';
 
-export function* handleAuthotization(action) {
+export function* handleAuthorization(action) {
     try {
         const response = yield call(request, AUTH, action.payload);
         const {success, token, error} = response;

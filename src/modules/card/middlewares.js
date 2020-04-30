@@ -1,7 +1,7 @@
 /*
 import {
-    setCardRequest, setCardSuccess,
-    getCardRequest, getCardSuccess,
+    , setCardSuccess,
+    setCardRequest, getCardSuccess,
     getCardFailure, setCardFailure
 } from './actions';
 
@@ -23,21 +23,5 @@ export const cardMiddleware = store => next => action => {
             .catch(error => {
                 store.dispatch(setCardFailure(error.error));
             });
-    } else if (action.type === getCardRequest.toString()) {
-        request(CARD, action.payload, true)
-            .then(response => response.json())
-            .then(data => {
-                if (data.id) {
-                    store.dispatch(getCardSuccess(data));
-                } else if (!data.success) {
-                    store.dispatch(getCardFailure(data.error));
-                }
-            })
-            .catch(error => {
-                store.dispatch(getCardFailure(error.error));
-            });
     }
-
-    return next(action);
-};
 */
