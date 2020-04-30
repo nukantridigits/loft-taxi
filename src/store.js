@@ -1,26 +1,30 @@
 import {createStore, compose, applyMiddleware} from 'redux';
-import {authMiddleware} from './modules/auth';
-import {cardMiddleware} from './modules/card';
+import createSagaMiddleware from 'redux-saga';
+import {rootSaga} from "./modules/rootSaga";
 import {setLocalStorageState} from './helpers/localStorage';
 import rootReducer from './modules';
 
+const sagaMiddleware = createSagaMiddleware();
+
+// const createAppStore = (initialState) => {
 const createAppStore = (initialState) => {
     const store = createStore(
         rootReducer,
-        initialState,
         compose(
-            applyMiddleware(authMiddleware, cardMiddleware),
+            applyMiddleware(sagaMiddleware),
             window.__REDUX_DEVTOOLS_EXTENSION__
                 ? window.__REDUX_DEVTOOLS_EXTENSION__()
                 : noop => noop,
         ),
     );
 
-    store.subscribe(() => {
+    /*store.subscribe(() => {
         setLocalStorageState({
             auth: store.getState().auth
         })
-    });
+    });*/
+
+    sagaMiddleware.run(rootSaga);
 
     return store;
 };

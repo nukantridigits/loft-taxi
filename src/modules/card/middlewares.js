@@ -1,3 +1,4 @@
+/*
 import {
     setCardRequest, setCardSuccess,
     getCardRequest, getCardSuccess,
@@ -39,3 +40,4 @@ export const cardMiddleware = store => next => action => {
 
     return next(action);
 };
+*/

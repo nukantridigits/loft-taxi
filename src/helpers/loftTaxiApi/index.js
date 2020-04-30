@@ -38,5 +38,12 @@ export const request = (type, payload, isGet = false) => {
 
     const url = urlCreate(payload, type, isGet);
 
-    return fetch(url, config);
+    return fetch(url, config).
+            then(response => response.json());
 };
+
+
+/*
+const authRequestApi = payload => request(AUTH, payload);
+
+export {authRequestApi};*/

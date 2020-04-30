@@ -9,6 +9,7 @@ import {getLocalStorageState} from './helpers/localStorage';
 import createStore from './store';
 import './index.scss';
 
+// const store = createStore(getLocalStorageState());
 const store = createStore(getLocalStorageState());
 
 ReactDOM.render(

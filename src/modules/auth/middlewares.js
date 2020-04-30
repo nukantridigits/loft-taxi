@@ -1,3 +1,4 @@
+/*
 import {authRequest, authSuccess, authFailure, regRequest} from "./actions";
 import {request} from '../../helpers/loftTaxiApi';
 
@@ -35,3 +36,4 @@ export const authMiddleware = store => next => action => {
 
     return next(action);
 };
+*/
