@@ -3,10 +3,10 @@ import env from "../../appData/env";
 const baseUrl = env.LOFT_TAXI_API_URL;
 export const TRANSPORT_ERROR_MSG = 'Не удалось получить данные от сервера: ';
 
-const urlCreate = (payload, type, isGet) => {
+const urlCreate = (payload, type, isGet, withoutParams) => {
     const url = `${baseUrl}${type}`;
 
-    if (!isGet) {
+    if (!isGet || withoutParams) {
         return url;
     } else {
         let count = 0;
@@ -27,7 +27,8 @@ const urlCreate = (payload, type, isGet) => {
     }
 };
 
-export const request = (type, payload, isGet = false) => {
+export const request = (type, payload, isGet = false, withoutParams = false) => {
+    console.log(type, payload, isGet);
     const config = {
         method: isGet ? 'GET' : 'POST',
     };
@@ -37,8 +38,7 @@ export const request = (type, payload, isGet = false) => {
         config.headers = {'Content-Type': 'application/json'}
     }
 
-    const url = urlCreate(payload, type, isGet);
+    const url = urlCreate(payload, type, isGet, withoutParams);
 
-    return fetch(url, config).
-            then(response => response.json());
+    return fetch(url, config).then(response => response.json());
 };
