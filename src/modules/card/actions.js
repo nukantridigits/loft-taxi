@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 
-export const getCardRequest = createAction('LOFT-TAXI/CARD/GET_CARD_REQUEST');
+export const getCardRequest = createAction('GET_CARD_REQUEST');
 export const setCardRequest = createAction('LOFT-TAXI/CARD/SET_CARD_REQUEST');
 export const getCardSuccess = createAction('LOFT-TAXI/CARD/GET_CARD_SUCCESS');
 export const setCardSuccess = createAction('LOFT-TAXI/CARD/SET_CARD_SUCCESS');

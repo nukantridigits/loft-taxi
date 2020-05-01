@@ -19,10 +19,15 @@
         display: none;
     }
 
-    button {
+    button,.btn {
         &:hover{
             background-color: #eeb60c;
         }
+    }
+
+    .overlay{
+        position: relative;
+        z-index: 10;
     }
 }
 
