@@ -12,9 +12,12 @@ const IsBookedMessage = ({makeNewOrder}) => {
             <Typography component="p">
                 Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.
             </Typography>
-            <Button size="large" type="submit"
+            <Button className="btn"
+                    size="large"
+                    type="submit"
                     variant="contained"
-                    color="primary" onClick={makeNewOrder}>
+                    color="primary"
+                    onClick={makeNewOrder}>
                 Сделать новый заказ
             </Button>
         </div>

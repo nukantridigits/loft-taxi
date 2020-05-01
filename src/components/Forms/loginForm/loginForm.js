@@ -119,7 +119,11 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAut
                 </Grid>
 
                 <Grid item xs={12} align="right" className="form_footer">
-                    <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
+                    <Button className="btn"
+                            disabled={isLoading}
+                            data-testid="form-submit-btn"
+                            size="large"
+                            type="submit"
                             variant="contained"
                             color="primary">
                         Войти

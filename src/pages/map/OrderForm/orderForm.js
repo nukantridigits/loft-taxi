@@ -10,20 +10,39 @@ import Button from "@material-ui/core/Button";
 import IsBookedMessage from './IsBookedMessage'
 import './orderForm.scss';
 
-const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressList, isBooked}) => {
-    const [fromList, setFromList] = useState(addressList);
-    const [toList, setToList] = useState(addressList);
+const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, isBooked}) => {
+    const [from, setFrom] = useState('');
+    const [to, setTo] = useState('');
+
+    const [addressList, setAddressList] = useState(addressListDefault);
+    const [canOrder, setCanOrder] = useState(false);
 
     useEffect(() => {
-        if (!addressList.length) {
+        if (!addressListDefault.length) {
             fetchAddressListRequest();
         }
     }, []);
+
+    useEffect(() => {
+        const addressList = addressListDefault.filter((address) => {
+            return address !== from && address !== to
+        });
+
+        setCanOrder(!!(from && to));
+        setAddressList(addressList);
+    }, [from, to]);
 
     const onFormSubmitHandler = (event) => {
         event.preventDefault();
     };
 
+    const onFromChangeHanlder = (event, newValue) => {
+        return setFrom(newValue);
+    };
+
+    const onToChangeHanlder = (event, newValue) => {
+        return setTo(newValue);
+    };
 
     return (
         <Grid container className="overlay order_form_wrapper">
@@ -37,10 +56,10 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressList, isBooked
                                         id="routeFrom"
                                         options={addressList}
                                         onChange={(event, newValue) => {
-
+                                            onFromChangeHanlder(event, newValue);
                                         }}
-                                        renderInput={(params) => <TextField {...params} label="Откуда"
-                                                                            margin="normal"/>}
+                                        getOptionSelected={(option) => option}
+                                        renderInput={(params) => <TextField {...params} label="Откуда" margin="normal"/>}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -48,14 +67,16 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressList, isBooked
                                         id="routeTo"
                                         options={addressList}
                                         onChange={(event, newValue) => {
-
+                                            onToChangeHanlder(event, newValue);
                                         }}
+                                        getOptionSelected={(option) => option}
                                         renderInput={(params) => <TextField {...params} label="Куда" margin="normal"/>}
                                     />
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
                                 <Button className="btn"
+                                        disabled={!canOrder}
                                         size="large"
                                         type="submit"
                                         variant="contained"
@@ -72,7 +93,7 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressList, isBooked
 };
 
 const mapStateToProps = state => ({
-    addressList: getAddressList(state),
+    addressListDefault: getAddressList(state),
     isBooked: getIsBooked(state),
 });
 

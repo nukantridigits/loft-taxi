@@ -1,4 +1,3 @@
-import {fork} from 'redux-saga/effects';
 import {handleAuthorization, handleRegistration} from "./auth/sagas";
 import {handleGettingCard, handleSettingCard} from "./card/sagas";
 import {handleFetchingAddressList} from "./routes/sagas";

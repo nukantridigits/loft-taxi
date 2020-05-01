@@ -109,7 +109,11 @@ const ProfileForm = ({isExist, token, isLoading, getCardRequest, setCardRequest}
                 </Grid>
 
                 <Grid item xs={12} align="center" className="form_footer">
-                    <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
+                    <Button className="btn"
+                            disabled={isLoading}
+                            data-testid="form-submit-btn"
+                            size="large"
+                            type="submit"
                             variant="contained"
                             color="primary">
                         Сохранить

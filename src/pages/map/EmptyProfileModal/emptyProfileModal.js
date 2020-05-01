@@ -22,12 +22,11 @@ const EmptyProfileModal = ({profileIsLoading}) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button
-                            className="btn"
-                            component={Link}
-                            variant="contained"
-                            color="primary"
-                            to={pageList.profile.path}
+                        <Button className="btn"
+                                component={Link}
+                                variant="contained"
+                                color="primary"
+                                to={pageList.profile.path}
                         >
                             Перейти в профиль
                         </Button>
