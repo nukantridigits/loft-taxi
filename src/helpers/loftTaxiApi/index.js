@@ -28,7 +28,6 @@ const urlCreate = (payload, type, isGet, withoutParams) => {
 };
 
 export const request = (type, payload, isGet = false, withoutParams = false) => {
-    console.log(type, payload, isGet);
     const config = {
         method: isGet ? 'GET' : 'POST',
     };

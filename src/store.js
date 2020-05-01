@@ -20,7 +20,9 @@ const createAppStore = (initialState) => {
 
     store.subscribe(() => {
         setLocalStorageState({
-            auth: store.getState().auth
+            auth: store.getState().auth,
+            card: store.getState().card,
+            routes: store.getState().routes,
         })
     });
 

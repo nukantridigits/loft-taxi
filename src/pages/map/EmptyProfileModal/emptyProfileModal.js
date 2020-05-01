@@ -5,9 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import pageList from "../../../appData/pageList";
-import './empty_profile_message.scss';
+import './emptyProfileModal.scss';
 
-const EmptyProfileMessage = ({profileIsLoading}) => {
+const EmptyProfileModal = ({profileIsLoading}) => {
     return (
         <div>
             {!profileIsLoading &&
@@ -38,4 +38,4 @@ const EmptyProfileMessage = ({profileIsLoading}) => {
     );
 };
 
-export default EmptyProfileMessage;
+export default EmptyProfileModal;

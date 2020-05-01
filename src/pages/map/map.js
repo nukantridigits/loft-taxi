@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import {getIsExist, getIsLoading} from '../../modules/card';
 import {connect} from 'react-redux';
 import OrderForm from './OrderForm';
-import EmptyProfileMessage from './EmptyProfileMessage';
+import EmptyProfileModal from './EmptyProfileModal';
 import './map.scss';
 
 
@@ -21,7 +21,7 @@ const MapPage = ({profileIsLoading, profileIsChecked}) => {
                     {
                         profileIsChecked ?
                             <OrderForm/> :
-                            <EmptyProfileMessage profileIsLoading={profileIsLoading}/>
+                            <EmptyProfileModal profileIsLoading={profileIsLoading}/>
                     }
                 </Grid>
             </div>

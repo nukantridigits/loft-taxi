@@ -1,10 +1,11 @@
 import {combineReducers} from 'redux';
 import {handleActions} from 'redux-actions';
-import {fetchAddressListRequest, fetchAddressListSuccess, fetchAddressListFailure} from './actions';
+import {fetchAddressListRequest, fetchAddressListSuccess, fetchAddressListFailure, makeNewOrder} from './actions';
 
 const defaultState = {
     addressList: [],
-    errors: null
+    errors: null,
+    isBooked: false
 };
 
 const addressList = handleActions(
@@ -14,6 +15,13 @@ const addressList = handleActions(
         [fetchAddressListFailure]: () => [],
     },
     defaultState.addressList
+);
+
+const isBooked = handleActions(
+    {
+        [makeNewOrder]: () => false
+    },
+    defaultState.isBooked
 );
 
 const errors = handleActions(
@@ -27,5 +35,5 @@ const errors = handleActions(
 
 
 export default combineReducers({
-    addressList, errors
+    addressList, isBooked, errors
 });
