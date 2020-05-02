@@ -32,6 +32,12 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
         setAddressList(addressList);
     }, [from, to]);
 
+    useEffect(() => {
+        return () => {
+            setDefaultComponentState();
+        }
+    }, []);
+
     const onFormSubmitHandler = (event) => {
         event.preventDefault();
 
@@ -54,6 +60,10 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
     };
 
     const onCancelOrderHandler = () => {
+        setDefaultComponentState();
+    };
+
+    const setDefaultComponentState = () => {
         setFrom('');
         setTo('');
         setAddressList(addressListDefault);
