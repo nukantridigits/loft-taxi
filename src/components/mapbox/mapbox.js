@@ -5,7 +5,7 @@ import './mapbox.scss';
 
 const LAYER_ID = 'route';
 
-const MapBox = ({isBooked, route}) => {
+const MapBox = ({route}) => {
     const [map, setMap] = useState(null);
     const [layerIsDrawn, setLayerIsDrawn] = useState(false);
     const mapContainer = useRef(null);
@@ -30,13 +30,13 @@ const MapBox = ({isBooked, route}) => {
     }, [map]);
 
     useEffect(() => {
-        if (!!map && !!isBooked && !!route.length) {
+        if (!!map && !!route.length) {
             if (!!layerIsDrawn) layerRemove();
 
             drawRoute(map, route);
         }
 
-    }, [isBooked, route]);
+    }, [route]);
 
     const layerRemove = () => {
         return map.removeLayer(LAYER_ID).removeSource(LAYER_ID);

@@ -4,20 +4,20 @@ import MainLayout from '../../layouts/main';
 import MapBox from '../../components/mapbox';
 import Grid from '@material-ui/core/Grid';
 import {getIsExist, getIsLoading} from '../../modules/card';
-import {getIsBooked, getRoute} from '../../modules/routes';
+import {getRoute} from '../../modules/routes';
 import {connect} from 'react-redux';
 import OrderForm from './OrderForm';
 import EmptyProfileModal from './EmptyProfileModal';
 import './map.scss';
 
 
-const MapPage = ({profileIsLoading, profileIsChecked, isBooked, route}) => {
+const MapPage = ({profileIsLoading, profileIsChecked, route}) => {
     const pageId = pageList.map.id;
 
     return (
         <MainLayout pageId={pageId} className={pageId}>
             <div data-testid="map-page-content">
-                <MapBox isBooked={isBooked} route={route}/>
+                <MapBox route={route}/>
                 <Grid container className="order_wrapper">
                     {
                         profileIsChecked ?
@@ -33,7 +33,6 @@ const MapPage = ({profileIsLoading, profileIsChecked, isBooked, route}) => {
 const mapStateToProps = state => ({
     profileIsChecked: getIsExist(state),
     profileIsLoading: getIsLoading(state),
-    isBooked: getIsBooked(state),
     route: getRoute(state)
 });
 
