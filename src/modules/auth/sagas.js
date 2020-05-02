@@ -1,14 +1,11 @@
 import {authSuccess, authFailure} from "./actions";
-import {call, put, fork} from 'redux-saga/effects';
-import {request, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
+import {call, put} from 'redux-saga/effects';
+import {auth, reg, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
 import {getCardRequest} from "../card";
-
-const AUTH = 'auth';
-const REGISTER = 'register';
 
 export function* handleAuthorization(action) {
     try {
-        const response = yield call(request, AUTH, action.payload);
+        const response = yield call(auth, action.payload);
         const {success, token, error} = response;
 
         if (success) {
@@ -24,7 +21,7 @@ export function* handleAuthorization(action) {
 
 export function* handleRegistration(action) {
     try {
-        const response = yield call(request, REGISTER, action.payload);
+        const response = yield call(reg, action.payload);
         const {success, token, error} = response;
 
         if (success) {

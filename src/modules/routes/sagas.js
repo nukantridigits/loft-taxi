@@ -6,14 +6,12 @@ import {
     placeOrder
 } from "./actions";
 import {call, put} from 'redux-saga/effects';
-import {request, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
+import {fetchRoute, fetchAddressList, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
 
-const ADDRESS_LIST = 'addressList';
-const ROUTE = 'route';
 
 export function* handleFetchingAddressList(action) {
     try {
-        const response = yield call(request, ADDRESS_LIST, action.payload, true, true);
+        const response = yield call(fetchAddressList, action.payload);
         const {addresses, error} = response;
 
         if (addresses) {
@@ -28,7 +26,7 @@ export function* handleFetchingAddressList(action) {
 
 export function* handleFetchingRoute(action) {
     try {
-        const response = yield call(request, ROUTE, action.payload, true);
+        const response = yield call(fetchRoute, action.payload);
 
         if (response.length) {
             yield put(fetchRouteSuccess(response));

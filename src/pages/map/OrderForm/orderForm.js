@@ -43,8 +43,8 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
 
         if (canOrder && !!from && !!to) {
             return fetchRouteRequest({
-                address1: from,
-                address2: to
+                addressFrom: from,
+                addressTo: to
             });
         }
 
