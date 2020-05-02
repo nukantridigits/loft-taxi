@@ -113,6 +113,6 @@ const mapStateToProps = state => ({
     route: getRoute(state)
 });
 
-const mapDispatchToProps = {fetchAddressListRequest, fetchRouteRequest, placeOrder, cancelOrder};
+const mapDispatchToProps = {fetchAddressListRequest, fetchRouteRequest, cancelOrder};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
