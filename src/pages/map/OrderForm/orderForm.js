@@ -34,7 +34,7 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
 
     useEffect(() => {
         return () => {
-            setDefaultComponentState();
+            setDefaultOrderFormState();
         }
     }, []);
 
@@ -60,10 +60,10 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
     };
 
     const onCancelOrderHandler = () => {
-        setDefaultComponentState();
+        setDefaultOrderFormState();
     };
 
-    const setDefaultComponentState = () => {
+    const setDefaultOrderFormState = () => {
         setFrom('');
         setTo('');
         setAddressList(addressListDefault);
@@ -71,7 +71,7 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
     };
 
     return (
-        <Grid container className="overlay order_form_wrapper">
+        <Grid container className="order_form_wrapper">
             <Paper className="order_form_container">
                 {isBooked ? <IsBookedMessage cancelOrder={onCancelOrderHandler}/> :
                     <form onSubmit={onFormSubmitHandler}>
