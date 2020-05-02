@@ -33,7 +33,7 @@ const MapBox = ({isBooked, route}) => {
         if (!!map && !!isBooked && !!route.length) {
             if (!!layerIsDrawn) layerRemove();
 
-            return drawRoute(map, route);
+            drawRoute(map, route);
         }
 
     }, [isBooked, route]);

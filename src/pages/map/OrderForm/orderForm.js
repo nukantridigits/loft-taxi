@@ -36,11 +36,13 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
         event.preventDefault();
 
         if (canOrder && !!from && !!to) {
-            fetchRouteRequest({
+            return fetchRouteRequest({
                 address1: from,
                 address2: to
             });
         }
+
+        return false;
     };
 
     const onFromChangeHanlder = (event, newValue) => {
