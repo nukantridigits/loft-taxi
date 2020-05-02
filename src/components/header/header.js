@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {authLogout} from "../../modules/auth";
 import {setProfileDefault} from "../../modules/card";
+import {setRoutesDefault} from "../../modules/routes";
 import {cleanLocalStorageState} from '../../helpers/localStorage';
 
 import './header.scss';
@@ -25,6 +26,7 @@ const Header = ({currentPage, authLogout, setProfileDefault}) => {
         if (pageId === pageList.login.id) {
             authLogout();
             setProfileDefault();
+            setRoutesDefault();
             cleanLocalStorageState();
         }
     };

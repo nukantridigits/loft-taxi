@@ -1,11 +1,23 @@
 import {combineReducers} from 'redux';
 import {handleActions} from 'redux-actions';
-import {fetchAddressListRequest, fetchAddressListSuccess, fetchAddressListFailure, makeNewOrder} from './actions';
+import {
+    fetchAddressListRequest,
+    fetchAddressListSuccess,
+    fetchAddressListFailure,
+    fetchRouteRequest,
+    fetchRouteSuccess,
+    fetchRouteFailure,
+    cancelOrder,
+    placeOrder,
+    setRoutesDefault
+} from './actions';
+
 
 const defaultState = {
     addressList: [],
     errors: null,
-    isBooked: false
+    isBooked: false,
+    route: []
 };
 
 const addressList = handleActions(
@@ -13,15 +25,29 @@ const addressList = handleActions(
         [fetchAddressListRequest]: () => [],
         [fetchAddressListSuccess]: (_state, action) => action.payload,
         [fetchAddressListFailure]: () => [],
+        [setRoutesDefault]: () => defaultState.addressList
     },
     defaultState.addressList
 );
 
 const isBooked = handleActions(
     {
-        [makeNewOrder]: () => false
+        [cancelOrder]: () => false,
+        [placeOrder]: () => true,
+        [setRoutesDefault]: () => defaultState.isBooked
     },
     defaultState.isBooked
+);
+
+const route = handleActions(
+    {
+        [fetchRouteRequest]: () => [],
+        [fetchRouteSuccess]: (_state, action) => action.payload,
+        [fetchRouteFailure]: () => [],
+        [cancelOrder]: () => [],
+        [setRoutesDefault]: () => defaultState.route
+    },
+    defaultState.route
 );
 
 const errors = handleActions(
@@ -29,11 +55,15 @@ const errors = handleActions(
         [fetchAddressListRequest]: () => null,
         [fetchAddressListSuccess]: () => null,
         [fetchAddressListFailure]: (_state, action) => action.payload,
+        [fetchRouteRequest]: () => null,
+        [fetchRouteSuccess]: () => null,
+        [fetchRouteFailure]: (_state, action) => action.payload,
+        [setRoutesDefault]: () => defaultState.errors
     },
     defaultState.errors
 );
 
 
 export default combineReducers({
-    addressList, isBooked, errors
+    addressList, isBooked, errors, route
 });

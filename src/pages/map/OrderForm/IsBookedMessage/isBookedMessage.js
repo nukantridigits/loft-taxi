@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import './isBookedMessage.scss';
 
-const IsBookedMessage = ({makeNewOrder}) => {
+const IsBookedMessage = ({cancelOrder}) => {
     return (
         <div className="is_booked_message">
             <Typography variant="h4" component="h1">
@@ -17,7 +17,7 @@ const IsBookedMessage = ({makeNewOrder}) => {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    onClick={makeNewOrder}>
+                    onClick={cancelOrder}>
                 Сделать новый заказ
             </Button>
         </div>

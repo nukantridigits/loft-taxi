@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from "react-redux";
-import {fetchAddressListRequest, makeNewOrder} from '../../../modules/routes';
-import {getAddressList, getIsBooked} from "../../../modules/routes/selectors";
+import {cancelOrder, fetchAddressListRequest, fetchRouteRequest} from '../../../modules/routes';
+import {getAddressList, getIsBooked, getRoute} from "../../../modules/routes/selectors";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import IsBookedMessage from './IsBookedMessage'
 import './orderForm.scss';
 
-const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, isBooked}) => {
+const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder, cancelOrder, addressListDefault, isBooked}) => {
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
 
@@ -34,6 +34,13 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, i
 
     const onFormSubmitHandler = (event) => {
         event.preventDefault();
+
+        if (canOrder && !!from && !!to) {
+            fetchRouteRequest({
+                address1: from,
+                address2: to
+            });
+        }
     };
 
     const onFromChangeHanlder = (event, newValue) => {
@@ -44,10 +51,17 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, i
         return setTo(newValue);
     };
 
+    const onCancelOrderHandler = () => {
+        setFrom('');
+        setTo('');
+        setAddressList(addressListDefault);
+        cancelOrder();
+    };
+
     return (
         <Grid container className="overlay order_form_wrapper">
             <Paper className="order_form_container">
-                {isBooked ? <IsBookedMessage makeNewOrder={makeNewOrder}/> :
+                {isBooked ? <IsBookedMessage cancelOrder={onCancelOrderHandler}/> :
                     <form onSubmit={onFormSubmitHandler}>
                         <Grid container>
                             <Grid container className="inputs_area">
@@ -59,7 +73,8 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, i
                                             onFromChangeHanlder(event, newValue);
                                         }}
                                         getOptionSelected={(option) => option}
-                                        renderInput={(params) => <TextField {...params} label="Откуда" margin="normal"/>}
+                                        renderInput={(params) => <TextField {...params} label="Откуда"
+                                                                            margin="normal"/>}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -95,8 +110,9 @@ const OrderForm = ({fetchAddressListRequest, makeNewOrder, addressListDefault, i
 const mapStateToProps = state => ({
     addressListDefault: getAddressList(state),
     isBooked: getIsBooked(state),
+    route: getRoute(state)
 });
 
-const mapDispatchToProps = {fetchAddressListRequest, makeNewOrder};
+const mapDispatchToProps = {fetchAddressListRequest, fetchRouteRequest, placeOrder, cancelOrder};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
