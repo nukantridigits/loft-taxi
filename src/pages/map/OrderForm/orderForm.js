@@ -95,6 +95,7 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
                                         size="large"
                                         type="submit"
                                         variant="contained"
+                                        fullWidth
                                         color="primary">
                                     Вызвать такси
                                 </Button>
