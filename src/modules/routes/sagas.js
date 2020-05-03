@@ -15,7 +15,6 @@ export function* handleFetchingAddressList(action) {
         const {addresses, error} = response;
 
         if (addresses) {
-            console.log('addresses', addresses);
             yield put(fetchAddressListSuccess(addresses.sort()));
         } else {
             yield put(fetchAddressListFailure(error));
@@ -33,7 +32,7 @@ export function* handleFetchingRoute(action) {
             yield put(fetchRouteSuccess(response));
             yield put(placeOrder());
         } else {
-            yield put(fetchRouteFailure('Поездка невозможна, с сервера не был получен маршрут'));
+            yield put(fetchRouteFailure("Поездка невозможна, с сервера не был получен маршрут"));
         }
     } catch (error) {
         yield put(fetchRouteFailure(TRANSPORT_ERROR_MSG + error.message));

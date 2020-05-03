@@ -61,13 +61,14 @@ describe.only('handleFetchingRouteSaga', () => {
     });
 
     const payload = {
-        //todo
+        addressFrom: "Волковское кладбище",
+        addressTo: "Шаверма на Невском"
     };
 
     it('fetch route error', async () => {
         const response = {
             success: false,
-            error: "errorMessage"
+            error: "Поездка невозможна, с сервера не был получен маршрут"
         };
 
         api.fetchRoute = jest.fn().mockImplementation(() => (response));
@@ -78,13 +79,14 @@ describe.only('handleFetchingRouteSaga', () => {
         );
 
         expect(api.fetchRoute).toHaveBeenCalled();
-        expect(dispatched).toContainEqual(fetchRouteFailure("errorMessage"));
+        expect(dispatched).toContainEqual(fetchRouteFailure(response.error));
     });
 
     it('fetch route success', async () => {
-        const response = {
-            //todo
-        };
+        const response = [
+            [30.355892,59.902484],
+            [30.354083,59.905525]
+        ];
 
         api.fetchRoute = jest.fn().mockImplementation(() => (response));
 
@@ -95,5 +97,6 @@ describe.only('handleFetchingRouteSaga', () => {
 
         expect(api.fetchRoute).toHaveBeenCalled();
         expect(dispatched).toContainEqual(fetchRouteSuccess(response));
+        expect(dispatched).toContainEqual(placeOrder());
     });
 });

@@ -9,11 +9,11 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import PageList from "../../../appData/pageList";
 import {connect} from 'react-redux';
-import {authRequest, getIsAuthorized, getIsLoading, regRequest} from "../../../modules/auth";
+import {authRequest, getIsLoading, regRequest} from "../../../modules/auth";
 import './loginForm.scss';
 
 
-const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAuthorized}) => {
+const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -136,7 +136,6 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading, isAut
 
 const mapStateToProps = state => ({
     isLoading: getIsLoading(state),
-    isAuthorized: getIsAuthorized(state),
 });
 
 const mapDispatchToProps = {authRequest, regRequest};
