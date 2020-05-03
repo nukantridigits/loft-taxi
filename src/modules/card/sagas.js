@@ -1,19 +1,18 @@
 import {call, put} from 'redux-saga/effects';
-import {getCardFailure, getCardSuccess, setCardSuccess, setCardFailure} from "./actions";
+import {fetchCardFailure, fetchCardSuccess, setCardSuccess, setCardFailure} from "./actions";
 import {fetchCard, setCard, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
 
 export function* handleGettingCard(action) {
     try {
-        console.log('action', action);
         const data = yield call(fetchCard, action.payload.token);
 
         if (data.id) {
-            yield put(getCardSuccess(data));
+            yield put(fetchCardSuccess(data));
         } else {
-            yield put(getCardFailure(data.error));
+            yield put(fetchCardFailure(data.error));
         }
     } catch (error) {
-        yield put(getCardFailure(TRANSPORT_ERROR_MSG + error.message));
+        yield put(fetchCardFailure(TRANSPORT_ERROR_MSG + error.message));
     }
 }
 

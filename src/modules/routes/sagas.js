@@ -15,6 +15,7 @@ export function* handleFetchingAddressList(action) {
         const {addresses, error} = response;
 
         if (addresses) {
+            console.log('addresses', addresses);
             yield put(fetchAddressListSuccess(addresses.sort()));
         } else {
             yield put(fetchAddressListFailure(error));

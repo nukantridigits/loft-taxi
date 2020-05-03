@@ -1,7 +1,7 @@
 import {
     setCardRequest, setCardSuccess,
-    getCardRequest, getCardSuccess,
-    getCardFailure, setCardFailure,
+    fetchCardRequest, fetchCardSuccess,
+    fetchCardFailure, setCardFailure,
     setProfileDefault
 } from './actions';
 import {combineReducers} from 'redux';
@@ -17,10 +17,10 @@ const defaultState = {
 const isLoading = handleActions({
         [setCardRequest]: () => true,
         [setCardSuccess]: () => false,
-        [getCardRequest]: () => true,
-        [getCardSuccess]: () => false,
+        [fetchCardRequest]: () => true,
+        [fetchCardSuccess]: () => false,
         [setCardFailure]: () => false,
-        [getCardFailure]: () => false,
+        [fetchCardFailure]: () => false,
         [setProfileDefault]: () => defaultState.isLoading,
     },
     defaultState.isLoading
@@ -29,10 +29,10 @@ const isLoading = handleActions({
 const isExist = handleActions({
         [setCardRequest]: () => false,
         [setCardSuccess]: () => true,
-        [getCardRequest]: () => false,
-        [getCardSuccess]: () => true,
+        [fetchCardRequest]: () => false,
+        [fetchCardSuccess]: () => true,
         [setCardFailure]: () => false,
-        [getCardFailure]: () => false,
+        [fetchCardFailure]: () => false,
         [setProfileDefault]: () => defaultState.isExist,
     },
     defaultState.isExist
@@ -49,7 +49,7 @@ const data = handleActions({
                 cvc: payload.cvc
             }
         },
-        [getCardSuccess]: (_state, action) => action.payload,
+        [fetchCardSuccess]: (_state, action) => action.payload,
         [setProfileDefault]: () => defaultState.data,
 
     },
@@ -59,10 +59,10 @@ const data = handleActions({
 const errors = handleActions({
         [setCardRequest]: () => null,
         [setCardSuccess]: () => null,
-        [getCardRequest]: () => null,
-        [getCardSuccess]: () => null,
+        [fetchCardRequest]: () => null,
+        [fetchCardSuccess]: () => null,
         [setCardFailure]: (_state, action) => action.payload,
-        [getCardFailure]: (_state, action) => action.payload,
+        [fetchCardFailure]: (_state, action) => action.payload,
         [setProfileDefault]: () => defaultState.errors,
     },
     defaultState.errors

@@ -1,7 +1,7 @@
 import {authSuccess, authFailure} from "./actions";
 import {call, put} from 'redux-saga/effects';
 import {auth, reg, TRANSPORT_ERROR_MSG} from '../../helpers/loftTaxiApi';
-import {getCardRequest} from "../card";
+import {fetchCardRequest} from "../card";
 
 export function* handleAuthorization(action) {
     try {
@@ -10,7 +10,7 @@ export function* handleAuthorization(action) {
 
         if (success) {
             yield put(authSuccess(token));
-            yield put(getCardRequest({token}));
+            yield put(fetchCardRequest({token}));
         } else if (error) {
             yield put(authFailure(error));
         }
