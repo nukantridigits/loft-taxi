@@ -20,14 +20,25 @@
     }
 
     .btn {
-        &:hover{
+        &:hover {
             background-color: #eeb60c;
         }
     }
 
-    .overlay{
+    .overlay {
         position: relative;
         z-index: 10;
+    }
+
+    .icon_wrapper {
+        display: flex;
+        &.pointer {
+            cursor: pointer;
+        }
+    }
+
+    form label{
+        color: #747474;
     }
 }
 
