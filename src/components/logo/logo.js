@@ -21,7 +21,7 @@ class Logo extends Component {
         }
 
         return (
-            <img data-testid="logo-component" className="logo" src={path}/>
+            <img alt="logo" data-testid="logo-component" className="logo" src={path}/>
         );
     }
 }

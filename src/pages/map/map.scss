@@ -3,10 +3,9 @@
         position: relative;
     }
 
-    .search_form_wrapper{
-        position: relative;
-        z-index: 1;
-        width: 1170px;
-        margin: 0 auto;
+    .order_form_wrapper {
+        width: auto;
+        position: absolute;
+        top: 80px;
     }
 }

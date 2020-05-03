@@ -6,14 +6,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
-import {getCardRequest, setCardRequest, getIsLoading, getIsExist, getData} from '../../../modules/card';
+import {fetchCardRequest, setCardRequest, getIsLoading, getIsExist, getData} from '../../../modules/card';
 import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
 import './profileForm.scss';
 
-const ProfileForm = (props) => {
-    const {isExist, token, isLoading, getCardRequest, setCardRequest} = props;
-
+const ProfileForm = ({isExist, token, isLoading, fetchCardRequest, setCardRequest}) => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cardName, setCardName] = useState('');
@@ -21,7 +19,7 @@ const ProfileForm = (props) => {
 
     useEffect(() => {
         if (!isExist) {
-            getCardRequest({token});
+            fetchCardRequest({token});
         }
     }, []);
 
@@ -111,7 +109,11 @@ const ProfileForm = (props) => {
                 </Grid>
 
                 <Grid item xs={12} align="center" className="form_footer">
-                    <Button disabled={isLoading} data-testid="form-submit-btn" size="large" type="submit"
+                    <Button className="btn"
+                            disabled={isLoading}
+                            data-testid="form-submit-btn"
+                            size="large"
+                            type="submit"
                             variant="contained"
                             color="primary">
                         Сохранить
@@ -129,6 +131,6 @@ const mapStateToProps = state => ({
     token: getToken(state)
 });
 
-const mapDispatchToProps = {setCardRequest, getCardRequest};
+const mapDispatchToProps = {setCardRequest, fetchCardRequest};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

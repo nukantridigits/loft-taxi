@@ -1,34 +1,92 @@
-import React, {Component} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ENV from "../../appData/env";
 import MapBoxGL from "mapbox-gl";
 import './mapbox.scss';
 
-class MapBox extends Component {
-    constructor(props) {
-        super(props);
-        this.map = null;
-        this.mapRef = React.createRef();
-    }
+const LAYER_ID = 'route';
 
-    componentDidMount() {
-        this.map = new MapBoxGL.Map({
-            container: this.mapRef.current,
-            style: 'mapbox://styles/mapbox/streets-v9',
-            accessToken: ENV.MAPBOX_ACCESS_TOKEN
-        });
-    }
+const MapBox = ({route, isBooked}) => {
+    const [map, setMap] = useState(null);
+    const mapContainer = useRef(null);
 
-    componentWillUnmount() {
-        if (this.map) {
-            this.map.remove();
+    useEffect(() => {
+        const initializeMap = ({setMap, mapContainer}) => {
+            const map = new MapBoxGL.Map({
+                accessToken: ENV.MAPBOX_ACCESS_TOKEN,
+                container: mapContainer.current,
+                style: "mapbox://styles/mapbox/light-v10",
+                center: [30.349351, 59.9976819],
+                zoom: 12
+            });
+
+            map.on("load", () => {
+                setMap(map);
+                map.resize();
+            });
+        };
+
+        if (!map) initializeMap({setMap, mapContainer});
+    }, [map]);
+
+    useEffect(() => {
+        if (!!map && !!route.length) {
+            if (!!checkLayerExist(LAYER_ID)) layerRemove(LAYER_ID);
+
+            drawRoute(map, route);
         }
-    }
 
-    render() {
-        return (
-            <div ref={this.mapRef} className="mapbox_container"/>
-        );
-    }
-}
+    }, [route]);
+
+    useEffect(() => {
+        if (!!checkLayerExist(LAYER_ID) && !isBooked) layerRemove(LAYER_ID)
+    }, [isBooked]);
+
+    const layerRemove = (layerId) => {
+        return map.removeLayer(layerId).removeSource(layerId);
+    };
+
+    const checkLayerExist = (layerId) => {
+        if (!!map) {
+            return typeof map.getLayer(layerId) !== 'undefined';
+        }
+
+        return false;
+    };
+
+    const drawRoute = (map, coordinates) => {
+        map.flyTo({
+            center: coordinates[0],
+            zoom: 12
+        });
+
+        map.addLayer({
+            id: LAYER_ID,
+            type: "line",
+            source: {
+                type: "geojson",
+                data: {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        type: "LineString",
+                        coordinates
+                    }
+                }
+            },
+            layout: {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            paint: {
+                "line-color": "#ffc617",
+                "line-width": 8
+            }
+        });
+    };
+
+    return (
+        <div ref={mapContainer} className="mapbox_container"/>
+    );
+};
 
 export default MapBox;

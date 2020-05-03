@@ -1,4 +1,3 @@
-//todo абстрагироваться с аргументом item
 const STORE_ITEM = 'store';
 
 export const getLocalStorageState = () => {
