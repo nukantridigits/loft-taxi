@@ -11,7 +11,6 @@ export function* rootSaga() {
     yield takeLatest(authRequest, handleAuthorization);
     yield takeLatest(regRequest, handleRegistration);
 
-    //todo переделать именование get=>fetch у всех actions
     yield takeLatest(fetchCardRequest, handleGettingCard);
     yield takeLatest(setCardRequest, handleSettingCard);
 
