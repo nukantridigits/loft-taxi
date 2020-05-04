@@ -14,13 +14,16 @@ import {connect} from 'react-redux';
 import {Form, Field} from 'react-final-form';
 import formatString from "format-string-by-pattern";
 import ClearIcon from "./clearIcon";
+import HelpIcon from './helpIcon';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import format from 'date-fns/format'
 
 import './profileForm.scss';
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
-    // const [clearCardNameShow, setClearCardNameShow] = useState(false);
+    // const [passwordMode, setPasswordMode] = useState(true);
+    const [showCvcHelper, setShowCvcHelper] = useState(false);
 
     useEffect(() => {
         if (!isExist) {
@@ -32,7 +35,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
 
     const initialValues = {
         cardNumber: card.cardNumber,
-        expiryDate: card.expiryDate,
+        expiryDate: card.expiryDate || new Date(),
         cardName: card.cardName,
         cvc: card.cvc
     };
@@ -57,7 +60,36 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
     };
 
     const onSubmit = values => {
-        return setCardRequest({...values});
+        return setCardRequest({
+            ...values, token
+        });
+    };
+
+    const helpIconMouseEnterHandle = () => {
+        return setShowCvcHelper(true);
+    };
+
+    const cvcHelperMouseEnterHandle = () => {
+        return setShowCvcHelper(true);
+    };
+
+    const helpIconMouseLeaveHandle = () => {
+        return setShowCvcHelper(false);
+    };
+
+    const cvcHelperMouseLeaveHandle = () => {
+        return setShowCvcHelper(false);
+    };
+
+    const CvcHelper = () => {
+        return (
+            <div onMouseEnter={cvcHelperMouseEnterHandle} onMouseLeave={cvcHelperMouseLeaveHandle} style={{
+                position: "absolute", zIndex: 10, background: "red", fontSize: "9px",
+                top: "16px", paddingBottom: "20px", width: "119px"
+            }}>
+                3 последние цифры на оборотной стороне карты
+            </div>
+        )
     };
 
     const PaymentForm = () => (
@@ -108,12 +140,13 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                     />
                                     <Field name="expiryDate"
                                            render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control">
-                                                   <InputLabel className={`${rootClass}_label`} htmlFor="cardNumber">
-                                                       Срок дейстия:
-                                                   </InputLabel>
-                                                   <Input id="expiryDate" {...input} className={`${rootClass}_input`} required/>
-                                               </FormControl>
+                                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                   <DatePicker label="Срок дейстия:"
+                                                               format="MM/yy"
+                                                               InputProps={{className: "date_picker"}}
+                                                               disablePast={true}
+                                                               views={["month", "year"]} {...input}/>
+                                               </MuiPickersUtilsProvider>
                                            )}
                                     />
                                 </Grid>
@@ -143,9 +176,11 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                     <Field name="cvc"
                                            parse={formatCvc}
                                            render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control">
+                                               <FormControl fullWidth={true} className="form_control cvc_wrapper">
+                                                   {showCvcHelper && <CvcHelper/>}
                                                    <InputLabel className={`${rootClass}_label`} htmlFor="cvc">
-                                                       CVC:
+                                                       CVC: <HelpIcon onMouseEnter={helpIconMouseEnterHandle}
+                                                                      onMouseLeave={helpIconMouseLeaveHandle}/>
                                                    </InputLabel>
                                                    <Input className={`${rootClass}_input`} id="cvc" {...input}
                                                           required/>
