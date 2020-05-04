@@ -16,9 +16,11 @@
                     }
                 }
             }
+
             &:after {
                 border-bottom-color: #eaeaea;
             }
+
             &.Mui-focused {
                 &:after {
                     border-bottom-color: #ffb1b1;
@@ -27,6 +29,7 @@
                     font-weight: 400;
                 }
             }
+
             &:before {
                 border-bottom-color: #eaeaea;
             }
@@ -45,6 +48,11 @@
             &.Mui-focused {
                 color: #747474;
             }
+        }
+
+        .MuiInputBase-input {
+            font-size: 24px;
+            font-weight: 300;
         }
     }
 

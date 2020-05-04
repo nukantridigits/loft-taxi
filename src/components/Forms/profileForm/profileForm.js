@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {createMuiTheme} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
@@ -12,9 +13,10 @@ import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
 import {Form, Field} from 'react-final-form';
 import formatString from "format-string-by-pattern";
-import {IconButton} from "@material-ui/core";
-import Box from '@material-ui/core/Box';
 import ClearIcon from "./clearIcon";
+import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 import './profileForm.scss';
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
@@ -106,14 +108,12 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                     />
                                     <Field name="expiryDate"
                                            render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control">
-                                                   <InputLabel className={`${rootClass}_label`} htmlFor="expiryDate">
-                                                       Срок действия:
-                                                   </InputLabel>
-                                                   <Input className={`${rootClass}_input`} id="expiryDate" {...input}
-                                                          required/>
-                                                   {meta.touched && meta.error && <span>{meta.error}</span>}
-                                               </FormControl>
+                                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                   <DatePicker format="MM/yy"
+                                                               InputProps={{className: "date_picker"}}
+                                                               disablePast={true}
+                                                               views={["month", "year"]} {...input}/>
+                                               </MuiPickersUtilsProvider>
                                            )}
                                     />
                                 </Grid>
