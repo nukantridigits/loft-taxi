@@ -20,10 +20,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import format from 'date-fns/format'
 
 import './profileForm.scss';
+import {withStyles, makeStyles} from '@material-ui/core/styles';
+import Tooltip from "@material-ui/core/Tooltip";
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
     // const [passwordMode, setPasswordMode] = useState(true);
-    const [showCvcHelper, setShowCvcHelper] = useState(false);
 
     useEffect(() => {
         if (!isExist) {
@@ -65,32 +66,22 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
         });
     };
 
-    const helpIconMouseEnterHandle = () => {
-        return setShowCvcHelper(true);
-    };
+    const useStylesBootstrap = makeStyles(() => ({
+        arrow: {},
+        tooltip: {
+            backgroundColor: "white",
+            border: "1px solid #999",
+            color: "#323232",
+            width: "194px",
+            height: "55px"
+        },
+    }));
 
-    const cvcHelperMouseEnterHandle = () => {
-        return setShowCvcHelper(true);
-    };
+    function BootstrapTooltip(props) {
+        const classes = useStylesBootstrap();
 
-    const helpIconMouseLeaveHandle = () => {
-        return setShowCvcHelper(false);
-    };
-
-    const cvcHelperMouseLeaveHandle = () => {
-        return setShowCvcHelper(false);
-    };
-
-    const CvcHelper = () => {
-        return (
-            <div onMouseEnter={cvcHelperMouseEnterHandle} onMouseLeave={cvcHelperMouseLeaveHandle} style={{
-                position: "absolute", zIndex: 10, background: "red", fontSize: "9px",
-                top: "16px", paddingBottom: "20px", width: "119px"
-            }}>
-                3 последние цифры на оборотной стороне карты
-            </div>
-        )
-    };
+        return <Tooltip arrow classes={classes} {...props} />;
+    }
 
     const PaymentForm = () => (
         <Form onSubmit={onSubmit}
@@ -119,9 +110,9 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
 
                     <Grid container className="cards_row" justify="center" spacing={4}>
                         <Grid item sm={6}>
-                            <Card className="card">
+                            <Card className="card bg_icon">
                                 <Grid container direction="column" justify="space-around" className="card_col">
-                                    <Field name="cardNumber"
+                                    {!isLoading &&<Field name="cardNumber"
                                            parse={formatCardNumber}
                                            render={({input, meta}) => (
                                                <FormControl fullWidth={true} className="form_control">
@@ -129,6 +120,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                        Номер карты:
                                                    </InputLabel>
                                                    <Input className={`${rootClass}_input`} id="cardNumber" {...input}
+                                                          inputProps={{minLength: "19", maxLength: "19"}}
                                                           endAdornment={input.value.length >= 1 &&
                                                           <InputAdornment position="end">
                                                               <ClearIcon onClick={form.mutators.clearCardNumber}/>
@@ -137,25 +129,24 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                    {meta.touched && meta.error && <span>{meta.error}</span>}
                                                </FormControl>
                                            )}
-                                    />
-                                    <Field name="expiryDate"
+                                    />}
+                                    {!isLoading &&<Field name="expiryDate"
                                            render={({input, meta}) => (
                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                                    <DatePicker label="Срок дейстия:"
                                                                format="MM/yy"
                                                                InputProps={{className: "date_picker"}}
-                                                               disablePast={true}
                                                                views={["month", "year"]} {...input}/>
                                                </MuiPickersUtilsProvider>
                                            )}
-                                    />
+                                    />}
                                 </Grid>
                             </Card>
                         </Grid>
                         <Grid item sm={6}>
                             <Card className="card">
                                 <Grid container direction="column" justify="space-around" className="card_col">
-                                    <Field name="cardName"
+                                    {!isLoading &&<Field name="cardName"
                                            parse={formatCardName}
                                            render={({input, meta}) => (
                                                <FormControl fullWidth={true} className="form_control">
@@ -172,22 +163,27 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                    {meta.touched && meta.error && <span>{meta.error}</span>}
                                                </FormControl>
                                            )}
-                                    />
-                                    <Field name="cvc"
+                                    />}
+                                    {!isLoading &&<Field name="cvc"
                                            parse={formatCvc}
                                            render={({input, meta}) => (
                                                <FormControl fullWidth={true} className="form_control cvc_wrapper">
-                                                   {showCvcHelper && <CvcHelper/>}
                                                    <InputLabel className={`${rootClass}_label`} htmlFor="cvc">
-                                                       CVC: <HelpIcon onMouseEnter={helpIconMouseEnterHandle}
-                                                                      onMouseLeave={helpIconMouseLeaveHandle}/>
+                                                       CVC:
+                                                       <BootstrapTooltip
+                                                           title="3 последние цифры на  оборотной стороне карты">
+                                                           <span>
+                                                                <HelpIcon/>
+                                                           </span>
+                                                       </BootstrapTooltip>
                                                    </InputLabel>
-                                                   <Input className={`${rootClass}_input`} id="cvc" {...input}
+                                                   <Input className={`${rootClass}_input`} id="cvc"
+                                                          inputProps={{minLength: "3"}} {...input}
                                                           required/>
                                                    {meta.touched && meta.error && <span>{meta.error}</span>}
                                                </FormControl>
                                            )}
-                                    />
+                                    />}
                                 </Grid>
                             </Card>
                         </Grid>
