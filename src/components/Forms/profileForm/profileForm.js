@@ -108,8 +108,10 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                     />
                                     <Field name="expiryDate"
                                            render={({input, meta}) => (
+                                               //todo TextFieldComponent
                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                   <DatePicker format="MM/yy"
+                                                   <DatePicker label="Срок дейстия:"
+                                                               format="MM/yy"
                                                                InputProps={{className: "date_picker"}}
                                                                disablePast={true}
                                                                views={["month", "year"]} {...input}/>
