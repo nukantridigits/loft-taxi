@@ -20,8 +20,10 @@ import DateFnsUtils from '@date-io/date-fns';
 import format from 'date-fns/format'
 
 import './profileForm.scss';
-import {withStyles, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Tooltip from "@material-ui/core/Tooltip";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
     // const [passwordMode, setPasswordMode] = useState(true);
@@ -31,6 +33,10 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
             fetchCardRequest({token});
         }
     }, []);
+
+    const handleClickShowPassword = () => {
+        setPasswordMode()
+    };
 
     const rootClass = "form_profile";
 
