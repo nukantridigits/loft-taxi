@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {createMuiTheme} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,26 +16,20 @@ import ClearIcon from "./clearIcon";
 import HelpIcon from './helpIcon';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import format from 'date-fns/format'
-
-import './profileForm.scss';
-import {makeStyles} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Tooltip from "@material-ui/core/Tooltip";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import './profileForm.scss';
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
-    // const [passwordMode, setPasswordMode] = useState(true);
+    const [showPassword, setShowPassword] = useState(true);
 
     useEffect(() => {
         if (!isExist) {
             fetchCardRequest({token});
         }
     }, []);
-
-    const handleClickShowPassword = () => {
-        setPasswordMode()
-    };
 
     const rootClass = "form_profile";
 
@@ -72,22 +65,29 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
         });
     };
 
-    const useStylesBootstrap = makeStyles(() => ({
-        arrow: {},
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    //todo компонент CvcToolTip
+
+    const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
-            backgroundColor: "white",
-            border: "1px solid #999",
-            color: "#323232",
+            backgroundColor: '#fff',
+            color: '#323232',
+            border: '1px solid #999',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             width: "194px",
-            height: "55px"
+            height: "55px",
+            position: "relative"
         },
-    }));
-
-    function BootstrapTooltip(props) {
-        const classes = useStylesBootstrap();
-
-        return <Tooltip arrow classes={classes} {...props} />;
-    }
+    }))(Tooltip);
 
     const PaymentForm = () => (
         <Form onSubmit={onSubmit}
@@ -118,33 +118,37 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                         <Grid item sm={6}>
                             <Card className="card bg_icon">
                                 <Grid container direction="column" justify="space-around" className="card_col">
-                                    {!isLoading &&<Field name="cardNumber"
-                                           parse={formatCardNumber}
-                                           render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control">
-                                                   <InputLabel className={`${rootClass}_label`} htmlFor="cardNumber">
-                                                       Номер карты:
-                                                   </InputLabel>
-                                                   <Input className={`${rootClass}_input`} id="cardNumber" {...input}
-                                                          inputProps={{minLength: "19", maxLength: "19"}}
-                                                          endAdornment={input.value.length >= 1 &&
-                                                          <InputAdornment position="end">
-                                                              <ClearIcon onClick={form.mutators.clearCardNumber}/>
-                                                          </InputAdornment>
-                                                          } required/>
-                                                   {meta.touched && meta.error && <span>{meta.error}</span>}
-                                               </FormControl>
-                                           )}
+                                    {!isLoading && <Field name="cardNumber"
+                                                          parse={formatCardNumber}
+                                                          render={({input, meta}) => (
+                                                              <FormControl fullWidth={true} className="form_control">
+                                                                  <InputLabel className={`${rootClass}_label`}
+                                                                              htmlFor="cardNumber">
+                                                                      Номер карты:
+                                                                  </InputLabel>
+                                                                  <Input className={`${rootClass}_input`}
+                                                                         id="cardNumber" {...input}
+                                                                         inputProps={{minLength: "19", maxLength: "19"}}
+                                                                         endAdornment={input.value.length >= 1 &&
+                                                                         <InputAdornment position="end">
+                                                                             <ClearIcon
+                                                                                 onClick={form.mutators.clearCardNumber}/>
+                                                                         </InputAdornment>
+                                                                         } required/>
+                                                                  {meta.touched && meta.error &&
+                                                                  <span>{meta.error}</span>}
+                                                              </FormControl>
+                                                          )}
                                     />}
-                                    {!isLoading &&<Field name="expiryDate"
-                                           render={({input, meta}) => (
-                                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                   <DatePicker label="Срок дейстия:"
-                                                               format="MM/yy"
-                                                               InputProps={{className: "date_picker"}}
-                                                               views={["month", "year"]} {...input}/>
-                                               </MuiPickersUtilsProvider>
-                                           )}
+                                    {!isLoading && <Field name="expiryDate"
+                                                          render={({input, meta}) => (
+                                                              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                  <DatePicker label="Срок дейстия:"
+                                                                              format="MM/yy"
+                                                                              InputProps={{className: "date_picker"}}
+                                                                              views={["month", "year"]} {...input}/>
+                                                              </MuiPickersUtilsProvider>
+                                                          )}
                                     />}
                                 </Grid>
                             </Card>
@@ -152,43 +156,76 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                         <Grid item sm={6}>
                             <Card className="card">
                                 <Grid container direction="column" justify="space-around" className="card_col">
-                                    {!isLoading &&<Field name="cardName"
-                                           parse={formatCardName}
-                                           render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control">
-                                                   <InputLabel className={`${rootClass}_label`} htmlFor="cardName">
-                                                       Имя владельца:
-                                                   </InputLabel>
-                                                   <Input className={`${rootClass}_input`} id="cardName" {...input}
-                                                          inputProps={{maxLength: "20"}}
-                                                          endAdornment={input.value.length >= 1 &&
-                                                          <InputAdornment position="end">
-                                                              <ClearIcon onClick={form.mutators.clearCardName}/>
-                                                          </InputAdornment>
-                                                          } required/>
-                                                   {meta.touched && meta.error && <span>{meta.error}</span>}
-                                               </FormControl>
-                                           )}
+                                    {!isLoading && <Field name="cardName"
+                                                          parse={formatCardName}
+                                                          render={({input, meta}) => (
+                                                              <FormControl fullWidth={true} className="form_control">
+                                                                  <InputLabel className={`${rootClass}_label`}
+                                                                              htmlFor="cardName">
+                                                                      Имя владельца:
+                                                                  </InputLabel>
+                                                                  <Input className={`${rootClass}_input`}
+                                                                         id="cardName" {...input}
+                                                                         inputProps={{maxLength: "20"}}
+                                                                         endAdornment={input.value.length >= 1 &&
+                                                                         <InputAdornment position="end">
+                                                                             <ClearIcon
+                                                                                 onClick={form.mutators.clearCardName}/>
+                                                                         </InputAdornment>
+                                                                         } required/>
+                                                                  {meta.touched && meta.error &&
+                                                                  <span>{meta.error}</span>}
+                                                              </FormControl>
+                                                          )}
                                     />}
-                                    {!isLoading &&<Field name="cvc"
-                                           parse={formatCvc}
-                                           render={({input, meta}) => (
-                                               <FormControl fullWidth={true} className="form_control cvc_wrapper">
-                                                   <InputLabel className={`${rootClass}_label`} htmlFor="cvc">
-                                                       CVC:
-                                                       <BootstrapTooltip
-                                                           title="3 последние цифры на  оборотной стороне карты">
-                                                           <span>
-                                                                <HelpIcon/>
-                                                           </span>
-                                                       </BootstrapTooltip>
-                                                   </InputLabel>
-                                                   <Input className={`${rootClass}_input`} id="cvc"
-                                                          inputProps={{minLength: "3"}} {...input}
-                                                          required/>
-                                                   {meta.touched && meta.error && <span>{meta.error}</span>}
-                                               </FormControl>
-                                           )}
+                                    {!isLoading && <Field name="cvc"
+                                                          parse={formatCvc}
+                                                          render={({input, meta}) => (
+                                                              <FormControl fullWidth={true}
+                                                                           className="form_control cvc_wrapper">
+                                                                  <InputLabel className={`${rootClass}_label`}
+                                                                              htmlFor="cvc">
+                                                                      CVC:
+                                                                      <HtmlTooltip
+                                                                          title={
+                                                                              <>
+                                                                                  <span className="popperArrow"/>
+                                                                                  <Typography component="p" style={{
+                                                                                      textAlign: "center",
+                                                                                      fontSize: "10px",
+                                                                                  }}>
+                                                                                      3 последние цифры<br/> на
+                                                                                      оборотной
+                                                                                      стороне карты</Typography>
+                                                                              </>
+                                                                          }
+                                                                      >
+                                                                          <span>
+                                                                            <HelpIcon/>
+                                                                          </span>
+                                                                      </HtmlTooltip>
+                                                                  </InputLabel>
+                                                                  <Input className={`${rootClass}_input`} id="cvc"
+                                                                         inputProps={{minLength: "3"}} {...input}
+                                                                         type={showPassword ? 'password' : 'text'}
+                                                                         endAdornment={
+                                                                             <InputAdornment position="end">
+                                                                                 <div style={{
+                                                                                     opacity: 0.5,
+                                                                                     cursor: "pointer"
+                                                                                 }}
+                                                                                      onClick={handleClickShowPassword}
+                                                                                      onMouseDown={handleMouseDownPassword}
+                                                                                 >
+                                                                                     {showPassword ? <VisibilityOff/> :
+                                                                                         <Visibility/>}
+                                                                                 </div>
+                                                                             </InputAdornment>}
+                                                                         required/>
+                                                                  {meta.touched && meta.error &&
+                                                                  <span>{meta.error}</span>}
+                                                              </FormControl>
+                                                          )}
                                     />}
                                 </Grid>
                             </Card>

@@ -37,7 +37,7 @@
         }
     }
 
-    form label{
+    form label {
         color: #747474;
     }
 }
@@ -47,4 +47,18 @@
         width: 1170px;
         margin: 0 auto;
     }
+}
+
+.popperArrow {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 99px;
+    height: 12px;
+    width: 12px;
+    background: inherit;
+    transform: rotate(45deg);
+    border-top: inherit;
+    border-left: inherit;
+    box-shadow: inherit;
 }
