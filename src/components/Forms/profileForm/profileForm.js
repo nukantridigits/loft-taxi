@@ -63,8 +63,8 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
         });
     };
 
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword)
+    const handleClickShowPassword = (event) => {
+        return setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (event) => {
