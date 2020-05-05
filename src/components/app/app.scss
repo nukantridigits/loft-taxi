@@ -62,3 +62,10 @@
     border-left: inherit;
     box-shadow: inherit;
 }
+
+.validation_error{
+    font-size: 10px;
+    color: red;
+    position: absolute;
+    bottom: -14px;
+}

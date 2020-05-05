@@ -16,13 +16,13 @@ import ClearIcon from "./clearIcon";
 import HelpIcon from './helpIcon';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import {withStyles} from '@material-ui/core/styles';
-import Tooltip from "@material-ui/core/Tooltip";
+import TooltipDefault from "./tooltipDefault";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import './profileForm.scss';
 
 const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCardRequest}) => {
+    const rootClass = "form_profile";
     const [showPassword, setShowPassword] = useState(true);
 
     useEffect(() => {
@@ -30,8 +30,6 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
             fetchCardRequest({token});
         }
     }, []);
-
-    const rootClass = "form_profile";
 
     const initialValues = {
         cardNumber: card.cardNumber,
@@ -73,25 +71,34 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
         event.preventDefault();
     };
 
-    //todo компонент CvcToolTip
+    const validate = (values) => {
+        const errors = {};
+        const cardNumber = values.cardNumber;
+        const cvc = values.cvc;
 
-    const HtmlTooltip = withStyles((theme) => ({
-        tooltip: {
-            backgroundColor: '#fff',
-            color: '#323232',
-            border: '1px solid #999',
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "194px",
-            height: "55px",
-            position: "relative"
-        },
-    }))(Tooltip);
+        if (!cardNumber) {
+            errors.cardNumber = "Заполните обязательное поле «Номер карты»";
+        } else if (cardNumber.length !== 19) {
+            errors.cardNumber = "«Номер карты» должен состоять из 16 цифр";
+        }
+
+        if (!values.cardName) {
+            errors.cardName = "Заполните обязательное поле «Имя владельца»";
+        }
+
+        if (!values.cvc) {
+            errors.cvc = "Заполните обязательное поле «CVC»";
+        } else if (cvc.length !== 3) {
+            errors.cvc = "«CVC» должен состоять из 3 цифр";
+        }
+
+        return errors;
+    };
 
     const PaymentForm = () => (
         <Form onSubmit={onSubmit}
               initialValues={initialValues}
+              validate={validate}
               mutators={{
                   clearCardNumber: (args, state, utils) => {
                       utils.changeValue(state, 'cardNumber', () => undefined)
@@ -101,7 +108,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                   },
               }}
         >
-            {({form, handleSubmit}) => (
+            {({form, handleSubmit, submitting, pristine}) => (
                 <form className={`${rootClass} form_wrapper`} onSubmit={handleSubmit}>
                     <Grid container align="center">
                         <Grid item xs={12} className={`${rootClass}_header`}>
@@ -136,12 +143,13 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                          </InputAdornment>
                                                                          } required/>
                                                                   {meta.touched && meta.error &&
-                                                                  <span>{meta.error}</span>}
+                                                                  <span
+                                                                      className="validation_error">{meta.error}</span>}
                                                               </FormControl>
                                                           )}
                                     />}
                                     {!isLoading && <Field name="expiryDate"
-                                                          render={({input, meta}) => (
+                                                          render={({input}) => (
                                                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                                                   <DatePicker label="Срок дейстия:"
                                                                               format="MM/yy"
@@ -174,7 +182,8 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                          </InputAdornment>
                                                                          } required/>
                                                                   {meta.touched && meta.error &&
-                                                                  <span>{meta.error}</span>}
+                                                                  <span
+                                                                      className="validation_error">{meta.error}</span>}
                                                               </FormControl>
                                                           )}
                                     />}
@@ -186,7 +195,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                   <InputLabel className={`${rootClass}_label`}
                                                                               htmlFor="cvc">
                                                                       CVC:
-                                                                      <HtmlTooltip
+                                                                      <TooltipDefault
                                                                           title={
                                                                               <>
                                                                                   <span className="popperArrow"/>
@@ -203,7 +212,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                           <span>
                                                                             <HelpIcon/>
                                                                           </span>
-                                                                      </HtmlTooltip>
+                                                                      </TooltipDefault>
                                                                   </InputLabel>
                                                                   <Input className={`${rootClass}_input`} id="cvc"
                                                                          inputProps={{minLength: "3"}} {...input}
@@ -223,7 +232,8 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                              </InputAdornment>}
                                                                          required/>
                                                                   {meta.touched && meta.error &&
-                                                                  <span>{meta.error}</span>}
+                                                                  <span
+                                                                      className="validation_error">{meta.error}</span>}
                                                               </FormControl>
                                                           )}
                                     />}
@@ -235,12 +245,21 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                     <Grid item xs={12} align="center" className="form_footer">
                         <Button className="btn"
                                 disabled={isLoading}
-                                data-testid="form-submit-btn"
                                 size="large"
                                 type="submit"
                                 variant="contained"
                                 color="primary">
                             Сохранить
+                        </Button>
+                        <Button className="btn"
+                                disabled={submitting || pristine}
+                                size="large"
+                                type="submit"
+                                variant="contained"
+                                color="white"
+                                onClick={form.reset}
+                        >
+                            Сбросить
                         </Button>
                     </Grid>
                 </form>
