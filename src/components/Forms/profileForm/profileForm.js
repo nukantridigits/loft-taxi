@@ -12,7 +12,7 @@ import {getToken} from "../../../modules/auth";
 import {connect} from 'react-redux';
 import {Form, Field} from 'react-final-form';
 import formatString from "format-string-by-pattern";
-import ClearIcon from "./clearIcon";
+import ClearIcon from "../clearIcon";
 import HelpIcon from './helpIcon';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -209,7 +209,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                                               </>
                                                                           }
                                                                       >
-                                                                          <span>
+                                                                          <span style={{marginTop: "-3px"}}>
                                                                             <HelpIcon/>
                                                                           </span>
                                                                       </TooltipDefault>
@@ -256,10 +256,10 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                 size="large"
                                 type="submit"
                                 variant="contained"
-                                color="white"
+                                color="default"
                                 onClick={form.reset}
                         >
-                            Сбросить
+                            Отменить
                         </Button>
                     </Grid>
                 </form>
