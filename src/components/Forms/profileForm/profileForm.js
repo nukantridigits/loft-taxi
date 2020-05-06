@@ -351,3 +351,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {setCardRequest, fetchCardRequest};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
+
