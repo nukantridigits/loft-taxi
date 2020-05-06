@@ -7,6 +7,61 @@
                 font-weight: bold;
             }
         }
+
+        &_input {
+            &:hover {
+                &:not(.Mui-disabled) {
+                    &:before {
+                        border-bottom-color: #eaeaea;
+                    }
+                }
+            }
+
+            &:after {
+                border-bottom-color: #eaeaea;
+            }
+
+            &.Mui-focused {
+                &:after {
+                    border-bottom-color: #ffb1b1;
+                }
+                input {
+                    font-weight: 400;
+                }
+            }
+
+            &:before {
+                border-bottom-color: #eaeaea;
+            }
+
+            input {
+                font-size: 24px;
+                font-weight: 300;
+                &#cardName {
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        &_label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            z-index: 1;
+            &.Mui-focused {
+                color: #747474;
+            }
+        }
+
+        .MuiInputBase-input {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .show_password_trigger {
+            opacity: .5;
+        }
+
     }
 
     .card {
@@ -15,12 +70,29 @@
         position: relative;
         padding: 30px;
         box-shadow: 0 0 26px rgba(0, 0, 0, 0.05), 0 15px 10px rgba(0, 0, 0, 0.06);
-        &_col{
+        &.bg_icon {
+            background: top 18px right 18px/39px 24px no-repeat url("../../../assets/img/mastercard.png");
+        }
+        &_col {
             height: 100%;
         }
     }
 
     .cards_row {
         margin-bottom: 47px;
+    }
+
+    .form_footer {
+        button:first-of-type {
+            margin-left: -10px;
+        }
+
+        button:last-of-type {
+            margin-left: 10px;
+            box-shadow: none;
+            &:hover {
+                background-color: #d8d8d8;
+            }
+        }
     }
 }

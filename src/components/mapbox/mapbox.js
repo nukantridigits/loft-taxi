@@ -30,7 +30,10 @@ const MapBox = ({route, isBooked}) => {
 
     useEffect(() => {
         if (!!map && !!route.length) {
-            if (!!checkLayerExist(LAYER_ID)) layerRemove(LAYER_ID);
+            if (!!checkLayerExist(LAYER_ID)) {
+                layerRemove(LAYER_ID);
+                markersClear();
+            }
 
             drawRoute(map, route);
         }
@@ -38,11 +41,22 @@ const MapBox = ({route, isBooked}) => {
     }, [route]);
 
     useEffect(() => {
-        if (!!checkLayerExist(LAYER_ID) && !isBooked) layerRemove(LAYER_ID)
+        if (!!checkLayerExist(LAYER_ID) && !isBooked) {
+            layerRemove(LAYER_ID);
+            markersClear();
+        }
     }, [isBooked]);
 
     const layerRemove = (layerId) => {
-        return map.removeLayer(layerId).removeSource(layerId);
+        map.removeLayer(layerId).removeSource(layerId);
+    };
+
+    const markersClear = () => {
+        const markers = document.querySelectorAll('.marker');
+
+        [].forEach.call(markers, (marker) => {
+            marker.remove();
+        });
     };
 
     const checkLayerExist = (layerId) => {
@@ -82,6 +96,22 @@ const MapBox = ({route, isBooked}) => {
                 "line-width": 8
             }
         });
+
+        drawMarks(coordinates[0], [...coordinates].pop());
+    };
+
+    const drawMarks = (coordsStart, coordsEnd) => {
+        const markerStart = document.createElement('div');
+        markerStart.className = 'marker start';
+        new MapBoxGL.Marker(markerStart)
+            .setLngLat(coordsStart)
+            .addTo(map);
+
+        const markerEnd = document.createElement('div');
+        markerEnd.className = 'marker end';
+        new MapBoxGL.Marker(markerEnd)
+            .setLngLat(coordsEnd)
+            .addTo(map);
     };
 
     return (
