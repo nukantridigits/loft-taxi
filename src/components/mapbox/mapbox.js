@@ -98,7 +98,7 @@ const MapBox = ({route, isBooked}) => {
             }
         });
 
-        drawMarks(coordinates[0], coordinates[coordinates.length - 1]);
+        drawMarks(coordinates[0], [...coordinates].pop());
     };
 
     const drawMarks = (coordsStart, coordsEnd) => {
