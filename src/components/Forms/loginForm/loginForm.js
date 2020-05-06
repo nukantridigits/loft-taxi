@@ -107,7 +107,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                                     <InputLabel htmlFor="email">
                                         {loginLabelText}
                                     </InputLabel>
-                                    <Input autocomplete="off" id="email" {...input}
+                                    <Input id="email" {...input}
                                            endAdornment={input.value.length >= 1 &&
                                            <InputAdornment position="end">
                                                <ClearIcon onClick={form.mutators.clearEmail}/>
