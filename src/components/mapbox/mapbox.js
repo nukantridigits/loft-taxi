@@ -115,7 +115,7 @@ const MapBox = ({route, isBooked}) => {
     };
 
     return (
-        <div ref={mapContainer} className="mapbox_container"/>
+        <div ref={mapContainer} className="mapbox_container" data-testid="mapBox"/>
     );
 };
 

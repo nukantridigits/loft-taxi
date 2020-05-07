@@ -163,7 +163,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
               }}
         >
             {({form, handleSubmit, submitting, pristine}) => (
-                <form className={`${rootClass} form_wrapper`} onSubmit={handleSubmit}>
+                <form className={`${rootClass} form_wrapper`} onSubmit={handleSubmit} data-testid="profileForm" >
                     <Grid container align="center">
                         <Grid item xs={12} className={`${rootClass}_header`}>
                             <Typography variant="h4" component="h1">

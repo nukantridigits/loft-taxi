@@ -4,3 +4,13 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 window.URL.createObjectURL = function() {};
+
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+    GeolocateControl: jest.fn(),
+    Map: jest.fn(() => ({
+        addControl: jest.fn(),
+        on: jest.fn(),
+        remove: jest.fn()
+    })),
+    NavigationControl: jest.fn()
+}));

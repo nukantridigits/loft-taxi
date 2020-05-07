@@ -9,7 +9,7 @@ import './emptyProfileModal.scss';
 
 const EmptyProfileModal = ({profileIsLoading}) => {
     return (
-        <div>
+        <div data-testid="emptyProfileModal">
             {!profileIsLoading &&
             <Paper className="empty_profile_message overlay" elevation={2}>
                 <Grid container justify="center" alignItems="center">

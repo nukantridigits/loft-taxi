@@ -16,7 +16,7 @@ const MapPage = ({profileIsLoading, profileIsChecked, isBooked, route}) => {
 
     return (
         <MainLayout pageId={pageId} className={pageId}>
-            <div data-testid="map-page-content">
+            <div data-testid="mapPage">
                 <MapBox isBooked={isBooked} route={route}/>
                 <Grid container className="order_wrapper wrapper">
                     {
