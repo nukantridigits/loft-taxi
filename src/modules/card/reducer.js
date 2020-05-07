@@ -39,16 +39,7 @@ const isExist = handleActions({
 );
 
 const data = handleActions({
-        [setCardSuccess]: (_state, action) => {
-            let payload = action.payload;
-
-            return {
-                cardNumber: payload.cardNumber,
-                expiryDate: payload.expiryDate,
-                cardName: payload.cardName,
-                cvc: payload.cvc
-            }
-        },
+        [setCardSuccess]: (_state, action) => action.payload,
         [fetchCardSuccess]: (_state, action) => action.payload,
         [setProfileDefault]: () => defaultState.data,
 

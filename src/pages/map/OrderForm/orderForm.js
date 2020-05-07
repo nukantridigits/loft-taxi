@@ -74,12 +74,13 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
         <Grid container className="order_form_wrapper">
             <Paper className="order_form_container">
                 {isBooked ? <IsBookedMessage cancelOrder={onCancelOrderHandler}/> :
-                    <form onSubmit={onFormSubmitHandler}>
+                    <form onSubmit={onFormSubmitHandler} data-testid="orderForm">
                         <Grid container>
                             <Grid container className="inputs_area">
                                 <Grid item xs={12}>
                                     <Autocomplete
                                         id="routeFrom"
+                                        className="routeFrom"
                                         options={addressList}
                                         onChange={(event, newValue) => {
                                             onFromChangeHanlder(event, newValue);
@@ -92,6 +93,7 @@ const OrderForm = ({route, fetchAddressListRequest, fetchRouteRequest, makeOrder
                                 <Grid item xs={12}>
                                     <Autocomplete
                                         id="routeTo"
+                                        className="routeTo"
                                         options={addressList}
                                         onChange={(event, newValue) => {
                                             onToChangeHanlder(event, newValue);

@@ -5,7 +5,7 @@ import './isBookedMessage.scss';
 
 const IsBookedMessage = ({cancelOrder}) => {
     return (
-        <div className="is_booked_message">
+        <div className="is_booked_message" data-testid="isBookedMessage">
             <Typography variant="h4" component="h1">
                 Заказ размещён
             </Typography>

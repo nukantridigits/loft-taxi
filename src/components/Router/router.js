@@ -9,7 +9,7 @@ import ProfilePage from "../../pages/profile";
 import LoginPage from "../../pages/login";
 import SignupPage from "../../pages/signup";
 
-const Router = ({isAuthorized}) => {
+export const Router = ({isAuthorized}) => {
     let router = null;
     let mapPath = pageList.map.path;
     let loginPath = pageList.login.path;

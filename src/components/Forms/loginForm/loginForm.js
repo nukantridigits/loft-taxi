@@ -86,7 +86,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
               }}
         >
             {({form, handleSubmit, submitting}) => (
-                <form className={`form ${formMainClass}`} id="loft_taxi_form" onSubmit={handleSubmit}>
+                <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="authForm" onSubmit={handleSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Typography variant="h4" component="h1">
@@ -107,7 +107,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                                     <InputLabel htmlFor="email">
                                         {loginLabelText}
                                     </InputLabel>
-                                    <Input autocomplete="off" id="email" {...input}
+                                    <Input id="email" {...input} data-testid="login-input"
                                            endAdornment={input.value.length >= 1 &&
                                            <InputAdornment position="end">
                                                <ClearIcon onClick={form.mutators.clearEmail}/>
@@ -127,7 +127,8 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                                         <InputLabel htmlFor="name">
                                             Имя
                                         </InputLabel>
-                                        <Input id="name" {...input} endAdornment={input.value.length >= 1 &&
+                                        <Input id="name" {...input} data-testid="name-input"
+                                               endAdornment={input.value.length >= 1 &&
                                         <InputAdornment position="end">
                                             <ClearIcon onClick={form.mutators.clearName}/>
                                         </InputAdornment>
@@ -143,7 +144,8 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                                         <InputLabel htmlFor="surname">
                                             Фамилия
                                         </InputLabel>
-                                        <Input id="surname" {...input} endAdornment={input.value.length >= 1 &&
+                                        <Input id="surname" {...input} data-testid="surname-input"
+                                               endAdornment={input.value.length >= 1 &&
                                         <InputAdornment position="end">
                                             <ClearIcon onClick={form.mutators.clearSurname}/>
                                         </InputAdornment>
@@ -162,7 +164,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                                     <InputLabel htmlFor="password">
                                         Пароль
                                     </InputLabel>
-                                    <Input type="password" id="password" {...input}
+                                    <Input type="password" id="password" {...input} data-testid="password-input"
                                            endAdornment={input.value.length >= 1 &&
                                            <InputAdornment position="end">
                                                <ClearIcon onClick={form.mutators.clearPassword}/>
@@ -176,7 +178,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                         <Grid item xs={12} align="right" className="form_footer">
                             <Button className="btn"
                                     disabled={isLoading || submitting}
-                                    data-testid="form-submit-btn"
+                                    data-testid="formSubmitBtn"
                                     size="large"
                                     type="submit"
                                     variant="contained"

@@ -14,7 +14,7 @@ import {cleanLocalStorageState} from '../../helpers/localStorage';
 
 import './header.scss';
 
-const Header = ({currentPage, authLogout, setProfileDefault}) => {
+export const Header = ({currentPage, authLogout, setProfileDefault}) => {
     Header.propTypes = {
         currentPage: PropTypes.string.isRequired
     };
