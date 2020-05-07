@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fe753e99.chunk.css",
+    "main.js": "/static/js/main.57bc2e02.chunk.js",
+    "main.js.map": "/static/js/main.57bc2e02.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2d6edfcb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2d6edfcb.js.map",
+    "static/js/2.bb1f990e.chunk.js": "/static/js/2.bb1f990e.chunk.js",
+    "static/js/2.bb1f990e.chunk.js.map": "/static/js/2.bb1f990e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.120023f7bf6acc19371768faa4ff1a3c.js": "/precache-manifest.120023f7bf6acc19371768faa4ff1a3c.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.fe753e99.chunk.css.map": "/static/css/main.fe753e99.chunk.css.map",
+    "static/js/2.bb1f990e.chunk.js.LICENSE.txt": "/static/js/2.bb1f990e.chunk.js.LICENSE.txt",
+    "static/media/logout.scss": "/static/media/bg.471e69aa.jpg",
+    "static/media/logo_dark.svg": "/static/media/logo_dark.3ed311ad.svg",
+    "static/media/logo_light.svg": "/static/media/logo_light.c5c72fa9.svg",
+    "static/media/profileForm.scss": "/static/media/mastercard.16cdbb0c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2d6edfcb.js",
+    "static/js/2.bb1f990e.chunk.js",
+    "static/css/main.fe753e99.chunk.css",
+    "static/js/main.57bc2e02.chunk.js"
+  ]
+}
