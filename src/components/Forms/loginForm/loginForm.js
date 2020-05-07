@@ -86,7 +86,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
               }}
         >
             {({form, handleSubmit, submitting}) => (
-                <form className={`form ${formMainClass}`} id="loft_taxi_form" onSubmit={handleSubmit} data-testid="authForm">
+                <form className={`form ${formMainClass}`} id="loft_taxi_form" data-testid="authForm" onSubmit={handleSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Typography variant="h4" component="h1">

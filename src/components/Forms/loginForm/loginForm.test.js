@@ -89,4 +89,49 @@ describe('LoginForm', () => {
         fireEvent.click(link);
         expect(history.location.pathname).toBe(pageList.login.path);
     });
+
+    it('Login form not submit with empty fields', () => {
+        const onSubmit = jest.fn();
+        const history = createBrowserHistory();
+        const {getByTestId} = render(
+            <Provider store={store}>
+                <Router history={history}>
+                    <LoginForm isRegForm={false} onSubmit={onSubmit}/>
+                </Router>
+            </Provider>
+        );
+
+        let form = getByTestId('authForm');
+        let formSubmitBtn = within(form).getByTestId('formSubmitBtn');
+
+        fireEvent.click(formSubmitBtn);
+
+        expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it('Login form submit', () => {
+        const onSubmit = jest.fn();
+        const history = createBrowserHistory();
+        const {getByTestId} = render(
+            <Provider store={store}>
+                <Router history={history}>
+                    <LoginForm isRegForm={false} onSubmit={onSubmit}/>
+                </Router>
+            </Provider>
+        );
+
+        let form = getByTestId('authForm');
+        let formWithin = within(form);
+
+        let loginInput = formWithin.getByTestId('login-input').querySelector('input');
+        fireEvent.change(loginInput, {target: {value: 'testlogin@gmail.com'}});
+        let passwordInput = formWithin.getByTestId('password-input').querySelector('input');
+        fireEvent.change(passwordInput, {target: {value: '123456'}});
+
+        let formSubmitBtn = within(form).getByTestId('formSubmitBtn');
+
+        fireEvent.click(formSubmitBtn);
+
+        expect(onSubmit).toHaveBeenCalled();
+    });
 });
