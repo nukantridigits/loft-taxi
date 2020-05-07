@@ -90,5 +90,4 @@ describe('cardReducer test', () => {
            successExpectedState
        );
    });
-
 });
