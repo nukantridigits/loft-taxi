@@ -139,7 +139,9 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                 <InputLabel style={{fontSize: "12px"}} className={`${rootClass}_label`}>
                     Срок дейстия:
                 </InputLabel>
-                <Input className={classes.input}
+                <Input
+                       data-testid="expiryDate"
+                       className={classes.input}
                        type="text"
                        readOnly
                        value={value}
@@ -190,6 +192,7 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                     Номер карты:
                                                 </InputLabel>
                                                 <Input className={`${rootClass}_input`}
+                                                       data-testid="cardNumber"
                                                        id="cardNumber" {...input}
                                                        inputProps={{minLength: "19", maxLength: "19"}}
                                                        endAdornment={input.value.length >= 1 &&
@@ -239,7 +242,9 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                             htmlFor="cardName">
                                                     Имя владельца:
                                                 </InputLabel>
-                                                <Input className={`${rootClass}_input`}
+                                                <Input
+                                                       data-testid="cardName"
+                                                       className={`${rootClass}_input`}
                                                        id="cardName" {...input}
                                                        inputProps={{maxLength: "20"}}
                                                        endAdornment={input.value.length >= 1 &&
@@ -283,7 +288,8 @@ const ProfileForm = ({isExist, card, token, isLoading, fetchCardRequest, setCard
                                                             </span>
                                                     </TooltipDefault>
                                                 </InputLabel>
-                                                <Input className={`${rootClass}_input`} id="cvc"
+                                                <Input data-testid="cvc"
+                                                       className={`${rootClass}_input`} id="cvc"
                                                        inputProps={{minLength: "3"}} {...input}
                                                        type={showPassword ? 'password' : 'text'}
                                                        endAdornment={

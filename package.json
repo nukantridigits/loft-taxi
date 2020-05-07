@@ -95,6 +95,7 @@
     "@material-ui/pickers": "^3.2.10",
     "date-fns": "^2.12.0",
     "format-string-by-pattern": "^1.2.1",
+    "history": "^4.10.1",
     "jest-canvas-mock": "^2.2.0",
     "jest-webgl-canvas-mock": "^0.2.3",
     "loft-taxi-mui-theme": "^1.2.0",

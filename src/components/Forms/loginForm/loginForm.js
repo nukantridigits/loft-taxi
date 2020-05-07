@@ -178,7 +178,7 @@ const LoginForm = ({isRegForm = false, authRequest, regRequest, isLoading}) => {
                         <Grid item xs={12} align="right" className="form_footer">
                             <Button className="btn"
                                     disabled={isLoading || submitting}
-                                    data-testid="form-submit-btn"
+                                    data-testid="formSubmitBtn"
                                     size="large"
                                     type="submit"
                                     variant="contained"
